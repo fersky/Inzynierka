@@ -1,0 +1,6 @@
+#!/bin/sh
+export CROSS_COMPILE=arm-linux-gnueabihf-
+#export ARCH=arm
+cd u-boot-sunxi
+make A13-OLinuXino-Micro_config
+make

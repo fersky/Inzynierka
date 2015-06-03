@@ -1,0 +1,50 @@
+#!/bin/sh
+export mp="/home/fero/debian-olinuxino"
+export st=$mp/sunxi-tools
+export us=$mp/u-boot-sunxi
+
+umount /mnt
+
+echo "#przygotowuje pierwsza partycje"
+
+mount /dev/sdb1 /mnt
+if [ $? = 0 ]
+then
+cp "$mp/linux-sunxi/arch/arm/boot/uImage" /mnt
+echo "#tworze plik script.bin"
+
+$st/fex2bin $st/release/script.fex > $st/release/script.bin
+if [ $1 = "u" ]
+then
+echo "#tworze pliki u-boot'a"
+sh preubt
+fi
+dd if=$us/spl/sunxi-spl.bin of=/dev/sdb bs=1024 seek=8
+#dd if=$us/u-boot.img of=/dev/sdb bs=1024 seek=40
+sync
+cp "$st/release/script.bin" /mnt
+sync
+echo "#przygotowano pierwsza partycje"
+else
+echo "#nie udało sie zamontowac pierwszej partycji"
+fi
+umount /mnt
+
+echo "#przygotowuje druga partycje"
+mount /dev/sdb2 /mnt
+if [ $? = 0 ]
+then
+rm -rf /mnt/
+#cd /mnt
+tar xJf debian-wheezy-7.5-armhf.com-20140603.tar.xz -C /mnt
+#gunzip -c $mp/mele_debian_armhf_minimal.cpio.gz | cpio -i
+rm -rf /mnt/lib/modules/
+cp -rf "$mp/linux-sunxi/out/lib/modules/" /mnt/lib/modules/
+sync
+echo "#przygotowano druga partycje"
+else
+echo "#nie udalo sie zamontowac drugiej partycji"
+fi
+umount /mnt
+
+
