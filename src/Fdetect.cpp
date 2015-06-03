@@ -8,8 +8,9 @@
 
 #include "main.hpp"
 extern std::vector<cv::Rect> faces;
+bool a=true;
 /** @function detectAndDisplay */
-void Fdetect::detectAndDisplay( cv::Mat frame )
+bool Fdetect::detectAndDisplay( cv::Mat frame )
 {
 
   cv::Mat frame_gray;
@@ -19,8 +20,13 @@ void Fdetect::detectAndDisplay( cv::Mat frame )
 
   //-- Detect faces
   face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(30, 30) );
+  if(faces.size()>0){
+	  std::cout<<std::endl<<"wykryto twarz"<<std::endl<<std::endl;
+	  return true;
+  }
+  else return false;
 /* Obrysowanie obszaru twarzy i oczu */
-if(false){
+if(a){
   for( size_t i = 0; i < faces.size(); i++ )
   {
 	  cv::Point center( faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5 );
@@ -45,7 +51,8 @@ if(false){
   imshow( window_name, frame );
  }
 bool Fdetect::work(void*){
-
+	std::cout<<name<<" RUNNING"<<std::endl;
+bool detected=false;
 
 		  if( capture )
 		  {
@@ -56,12 +63,16 @@ bool Fdetect::work(void*){
 		  //-- 3. Apply the classifier to the frame
 		      if( !frame.empty() )
 		      {
-		   	   sleep(1);
-		   	   detectAndDisplay( frame );
-		   	   //SigW(0,frame);
-		   //   savelog(frame);
+		    	if(  detectAndDisplay( frame ))
+		    	{
+		    		sleep(1);
+		    		if(  detectAndDisplay( frame ))
+		    		{
+		    			 SigW(0,&frame);
+		    		}
+		    	}
 
-SigW(0,&frame);
+
 		      }
 		      else
 		      { printf(" --(!) No captured frame -- Break!"); break; }

@@ -12,13 +12,8 @@
 
 class Worker : public Module{
 public:
-	Worker(){name="Worker_module";
-
-	}
-	bool work(void*){
-		std::cout<<"WORKER RUNNING"<<std::endl;
-
-	}
+	Worker();
+	bool work(void*);
 	~Worker(){};
 };
 

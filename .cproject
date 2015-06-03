@@ -57,6 +57,19 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="cdt.managedbuild.config.gnu.exe.debug.20493706.309551154" name="/" resourcePath="tools">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.1416444529" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug" unusedChildren="">
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1982472113" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1163953814"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.99257113" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1988110229"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1591542811" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.2042036884"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.1028477733" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug.33416191"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1638537634" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.2002760288"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.716673659" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug.1820864444"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="tools" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -126,5 +139,12 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/FICAM"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/FICAM"/>
+		</configuration>
+	</storageModule>
 </cproject>

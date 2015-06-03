@@ -9,6 +9,7 @@
 #include "main.hpp"
 extern std::vector<cv::Rect> faces;
 bool Logger::work(void* wsk){
+	std::cout<<name<<" RUNNING"<<std::endl;
 	std::ofstream log;
 	frame = (cv::Mat*)(wsk);
 	log.open("/var/www/html/log.txt",std::ios::out | std::ios::app);
@@ -54,4 +55,4 @@ strftime(buf,sizeof(buf),"X%Y-%m-%d.%X",now);
 return buf;
 }
 
-Logger::Logger(){Module::name="Logger_module";}
+Logger::Logger(){name="LOGGER";}

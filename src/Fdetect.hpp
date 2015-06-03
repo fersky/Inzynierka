@@ -11,7 +11,7 @@
 
 class Fdetect : public Module {
 
-void detectAndDisplay( cv::Mat frame );
+bool detectAndDisplay( cv::Mat frame );
 public:
 
 cv::CascadeClassifier face_cascade;
