@@ -6,11 +6,13 @@
  */
 #include "main.hpp"
 bool Controller::lunit(int nr,void* wsk){
+	int state= -1;
 	std::cout<<"CONTROLLER ZAPIS"<<"RECEIVED SIGNAL :" << nr<<std::endl;
 switch (nr){
 case 0 :			   //signal from Fdetect
+	state=1;
 	modules[1]->work(wsk);//Logger runs
-	modules[2]->work();//Worker runs
+	modules[2]->work(&state);//Worker runs
 if(wsk)	{
 	//printf (" wartosc a = %d",*((int*)wsk)	);
 }

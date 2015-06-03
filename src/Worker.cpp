@@ -8,15 +8,21 @@
 
 bool Worker::work(void* wsk){
 	std::cout<<name<<" RUNNING"<<std::endl;
-	/* odkomentować przy budowaniu na płytę
+
 	int state= *((int*)(wsk));
 if(state == 1){
+	/* odkomentować przy budowaniu na płytę
 	system("echo 1 > /sys/class/gpio/gpio6_pe6/value");
+	*/
+	std::cout<<"\n WORKER ustawia stan WYSOKI"<<std::endl;
 }
 else if (state == 0){
+	/* odkomentować przy budowaniu na płytę
 	system("echo 0 > /sys/class/gpio/gpio6_pe6/value");
+	*/
+	std::cout<<"\n WORKER ustawia stan NISKI"<<std::endl;
 }
-/*
+
 	return false;
 }
 

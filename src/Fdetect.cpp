@@ -85,12 +85,12 @@ bool detected=false;
 }
 Fdetect::~Fdetect(){}
 Fdetect::Fdetect(Controller * k){
-	name="Fdetect_module";
+	name="FDETECT";
 
 cv::String face_cascade_name = "data/haarcascade_frontalface_alt.xml";
 cv::String eyes_cascade_name = "data/haarcascade_eye_tree_eyeglasses.xml";
 window_name = "Capture - Face detection";
-std::cout<<"FDETECT RUNNING"<<std::endl;
+
 SigW.connect(bind(&Controller::lunit,k,_1, _2));
 	//-- 1. Load the cascades
 		 if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading cascade \n"); };
