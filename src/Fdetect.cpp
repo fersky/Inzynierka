@@ -8,7 +8,7 @@
 
 #include "main.hpp"
 extern std::vector<cv::Rect> faces;
-bool a=true;
+bool a=false;
 /** @function detectAndDisplay */
 bool Fdetect::detectAndDisplay( cv::Mat frame )
 {
@@ -21,10 +21,14 @@ bool Fdetect::detectAndDisplay( cv::Mat frame )
   //-- Detect faces
   face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, cv::Size(30, 30) );
   if(faces.size()>0){
-	  std::cout<<std::endl<<"wykryto twarz"<<std::endl<<std::endl;
+	//  std::cout<<std::endl<<"wykryto twarz"<<std::endl<<std::endl;
+	  //on=false;
+	  SigW(0,&frame);
 	  return true;
   }
+
   else return false;
+
 /* Obrysowanie obszaru twarzy i oczu */
 if(a){
   for( size_t i = 0; i < faces.size(); i++ )
@@ -52,25 +56,20 @@ if(a){
  }
 bool Fdetect::work(void*){
 	std::cout<<name<<" RUNNING"<<std::endl;
-bool detected=false;
+
 
 		  if( capture )
 		  {
-		    while( true )
+		    while( on)
 		    {
 		  frame = cvQueryFrame( capture );
 
 		  //-- 3. Apply the classifier to the frame
 		      if( !frame.empty() )
 		      {
-		    	if(  detectAndDisplay( frame ))
-		    	{
-		    		sleep(1);
-		    		if(  detectAndDisplay( frame ))
-		    		{
-		    			 SigW(0,&frame);
-		    		}
-		    	}
+		      detectAndDisplay( frame );
+
+
 
 
 		      }
@@ -86,7 +85,7 @@ bool detected=false;
 Fdetect::~Fdetect(){}
 Fdetect::Fdetect(Controller * k){
 	name="FDETECT";
-
+on=true;
 cv::String face_cascade_name = "data/haarcascade_frontalface_alt.xml";
 cv::String eyes_cascade_name = "data/haarcascade_eye_tree_eyeglasses.xml";
 window_name = "Capture - Face detection";

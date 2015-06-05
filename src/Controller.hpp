@@ -11,14 +11,13 @@
 
 class Controller{
 public:
-	boost::signal <void(void *wsk)>SigC;
+	boost::signal <bool(void *wsk)>SigC;
 Controller();
+bool detected;
 	Module * modules[3];
  bool lunit(int nr,void* wsk);
-~Controller(){
-	delete  [] modules;
-}
 
+ ~Controller();
 };
 
 
