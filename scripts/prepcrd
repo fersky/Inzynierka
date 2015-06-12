@@ -3,6 +3,13 @@ export mp="/home/fero/debian-olinuxino"
 export st=$mp/sunxi-tools
 export us=$mp/u-boot-sunxi
 
+#przygotowanie jądra
+if [ $2 = "k" ]
+then
+echo "#buduje jadro"
+sh prepimg
+fi
+
 umount /mnt
 
 echo "#przygotowuje pierwsza partycje"
@@ -17,7 +24,7 @@ $st/fex2bin $st/release/script.fex > $st/release/script.bin
 if [ $1 = "u" ]
 then
 echo "#tworze pliki u-boot'a"
-sh preubt
+sh prepubt
 fi
 dd if=$us/spl/sunxi-spl.bin of=/dev/sdb bs=1024 seek=8
 #dd if=$us/u-boot.img of=/dev/sdb bs=1024 seek=40
@@ -35,11 +42,17 @@ mount /dev/sdb2 /mnt
 if [ $? = 0 ]
 then
 rm -rf /mnt/
-#cd /mnt
-tar xJf debian-wheezy-7.5-armhf.com-20140603.tar.xz -C /mnt
-#gunzip -c $mp/mele_debian_armhf_minimal.cpio.gz | cpio -i
+cd /mnt
+#tar xJf debian-wheezy-7.5-armhf.com-20140603.tar.xz -C /mnt
+gunzip -c $mp/mele_debian_armhf_minimal.cpio.gz | cpio -i
 rm -rf /mnt/lib/modules/
 cp -rf "$mp/linux-sunxi/out/lib/modules/" /mnt/lib/modules/
+## dodanie modułów do  pliku  /etc/modules - ładowanych przy starcie systemu
+mod="/mnt/etc/modules"
+echo "videobuf-core" >> $mod
+echo "videobuf-dma-contig" >> $mod
+echo "ov7670" >> $mod
+echo "sun4i_csi0" >> $mod
 sync
 echo "#przygotowano druga partycje"
 else
