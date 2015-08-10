@@ -21,6 +21,7 @@ vector<Rect> faces;
 int main(){
 	Controller k;
 	k.modules[0]->work();
+//	k.modules[1]
 	return 0;
 }
 
