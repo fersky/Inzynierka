@@ -5,10 +5,12 @@
  *      Author: fero
  */
 #include "main.hpp"
-#define BRD_BUILD 
+
+//#define BRD_BUILD
 #ifdef BRD_BUILD
 #include <wiringPi.h>
 #endif
+
 bool Worker::work(void* wsk){
 
 	std::cout<<name<<" RUNNING"<<std::endl;
@@ -45,12 +47,4 @@ Worker::Worker(){
 #endif
 }
 
-void * Worker::detector(void * param){
 
-while(1){
-#ifdef BRD_BUILD
-	if(!digitalRead(1)) //Przyjęto LOW na pinie GPIO1 jako stan drzwi zamknięty
-	SigW(2,NULL);
-#endif
-}
-}

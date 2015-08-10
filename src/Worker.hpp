@@ -15,7 +15,7 @@ public:
 	Worker();
 	bool work(void*);
 	~Worker(){};
-	void * detector(void *param);
+//	void * detector(void *param);
 };
 
 
