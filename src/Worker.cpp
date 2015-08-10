@@ -6,23 +6,29 @@
  */
 #include "main.hpp"
 
+//#define BRD_BUILD
+#ifdef BRD_BUILD
+#include <wiringPi.h>
+#endif
+
 bool Worker::work(void* wsk){
 
 	std::cout<<name<<" RUNNING"<<std::endl;
 
 	int state= *((int*)(wsk));
-if(state == 1){
-	/* odkomentować przy budowaniu na płytę
-	system("echo 1 > /sys/class/gpio/gpio6_pe6/value");
-	*/
-	std::cout<<"\n WORKER ustawia stan WYSOKI"<<std::endl;
+
+		if(state == 1){
+#ifdef BRD_BUILD
+	digitalWrite(0,HIGH);
+#endif
+	std::cout<<"\n WORKER ustawia stan WYSOKI"<<std::endl; //otwórz drzwi
 	SigW(2,wsk);
 }
 else if (state == 2){
-	/* odkomentować przy budowaniu na płytę
-	system("echo 0 > /sys/class/gpio/gpio6_pe6/value");
-	*/
-	std::cout<<"\n WORKER ustawia stan NISKI"<<std::endl;
+#ifdef BRD_BUILD
+	digitalWrite(0,LOW);
+#endif
+	std::cout<<"\n WORKER ustawia stan NISKI"<<std::endl; //zamknij drzwi
 	SigW(2,wsk);
 }
 else
@@ -34,8 +40,11 @@ else
 Worker::Worker(){
 
 	name="WORKER";
-	/* odkomentować przy budowaniu na płytę
-	system("for A in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do echo \"$A\" > /sys/class/gpio/export ; done ");
-	system("echo out > /sys/class/gpio/gpio6_pe6/direction");
-	*/
+#ifdef BRD_BUILD
+	wiringPiSetup();
+	pinMode (0,OUTPUT);	//GPIO_0 (BCM_GPIO 17) (PHYS. HEADER -> 11)
+	pinMode (1,INPUT);	//GPIO_1 (BCM_GPIO 18) (PHYS. HEADER -> 12)
+#endif
 }
+
+

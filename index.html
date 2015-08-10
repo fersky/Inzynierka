@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<title>Intelligent Camera v1.0 </title>
+</head>
+
+<body>
+
+
+</body>
+
+
+<script type="text/javascript">
+    var lastPhoto = "";
+    getImages();
+    setInterval(function() {
+        reloadImages();
+    }, 1000);
+
+    function getImages() {
+        $.ajax({
+            url: "getFaces.php",
+            dataType: "json",
+            success: function(data) {
+                lastPhoto = $(data).last()[0];
+                
+			$('body').before('<h2 style="font-size:300%"> CAMERA LOG</h2>');                    
+                   
+                    $.each(data, function(i, filename) {
+
+                        var $temp = filename;
+
+                        dataZdjecia = $temp.split("X")[1].substring(0, $temp.split("X")[1].length - 4);
+                        numerZdjecia = $temp.split("X")[0];
+                        //    numerZdjecia = $(filename).split("X")[0];
+                        $('body').prepend('<img class="face-image" src="faces/' + filename + '"><font size="6">DATA: ' + dataZdjecia + ' Numer zdjecia: ' + numerZdjecia + '</font><br>');
+});
+                }
+
+            });
+        };
+    
+    function reloadImages(){
+$.ajax({
+            url: "getFaces.php",
+            dataType: "json",
+            success: function(data) {
+                
+                if ($('.face-image').first().attr("src") == "faces/" + $(data).last()[0]) {
+                    console.log("if1")
+
+                } else {
+
+
+                    var flag = false;
+                    $.each(data, function(i, filename) {
+
+                        var $temp = filename;
+                        if(flag==false){
+                            if($temp==lastPhoto){
+                                flag=true;
+                            }
+                            else{
+                                //nic sie nie dzieje, bo to pliki ktore już są na stronie
+                            }
+
+                        }
+                        if (flag==true) {
+                            dataZdjecia = $temp.split("X")[1].substring(0, $temp.split("X")[1].length - 4);
+                            numerZdjecia = $temp.split("X")[0];
+                            //    numerZdjecia = $(filename).split("X")[0];
+                            $('body').prepend('<img class="face-image" src="faces/' + filename + '">Data zdjecia: ' + dataZdjecia + ' Numer zdjecia: ' + numerZdjecia + '<br>');
+                        };
+                        
+                    }); 
+                    lastPhoto = $(data).last()[0];
+
+                    flag=false;
+                }
+
+            }
+        });
+
+    }
+</script>
+
+
+</html>
