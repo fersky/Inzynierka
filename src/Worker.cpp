@@ -5,6 +5,7 @@
  *      Author: fero
  */
 #include "main.hpp"
+#define BRD_BUILD 
 #ifdef BRD_BUILD
 #include <wiringPi.h>
 #endif
@@ -42,4 +43,14 @@ Worker::Worker(){
 	pinMode (0,OUTPUT);	//GPIO_0 (BCM_GPIO 17) (PHYS. HEADER -> 11)
 	pinMode (1,INPUT);	//GPIO_1 (BCM_GPIO 18) (PHYS. HEADER -> 12)
 #endif
+}
+
+void * Worker::detector(void * param){
+
+while(1){
+#ifdef BRD_BUILD
+	if(!digitalRead(1)) //Przyjęto LOW na pinie GPIO1 jako stan drzwi zamknięty
+	SigW(2,NULL);
+#endif
+}
 }

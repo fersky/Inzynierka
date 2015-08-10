@@ -17,7 +17,7 @@ public:
 cv::CascadeClassifier face_cascade;
 cv::CascadeClassifier eyes_cascade;
 cv::String window_name;
-CvCapture* capture;
+cv::VideoCapture capture;
 cv::Mat frame;
 ~Fdetect();
 Fdetect(Controller * k);

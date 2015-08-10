@@ -5,10 +5,11 @@
  *      Author: fero
  */
 #include "Fdetect.hpp"
-
 #include "main.hpp"
+
+//#include <opencv2/videoio/videoio.hpp>
 extern std::vector<cv::Rect> faces;
-bool a=false;
+bool a=true;
 /** @function detectAndDisplay */
 bool Fdetect::detectAndDisplay( cv::Mat frame )
 {
@@ -57,12 +58,12 @@ if(a){
 bool Fdetect::work(void*){
 	std::cout<<name<<" RUNNING"<<std::endl;
 
-
-		  if( capture )
+		  if(1)
 		  {
 		    while( on)
 		    {
-		  frame = cvQueryFrame( capture );
+		 // frame = cvQueryFrame( capture );
+		bool bsuccess = capture.read(frame);
 
 		  //-- 3. Apply the classifier to the frame
 		      if( !frame.empty() )
@@ -96,4 +97,14 @@ SigW.connect(bind(&Controller::lunit,k,_1, _2));
 		 if( !eyes_cascade.load( eyes_cascade_name ) ){ printf("--(!)Error loading cascade \n"); };
 
  //-- 2. Read the video stream
-	  capture = cvCaptureFromCAM( -1 );}
+
+//	  capture = cvCaptureFromCAM( -1 );
+//cv::VideoCapture capture;
+capture.open(-1);
+if(!capture.isOpened()){
+std::cout<<"cannot open camera!"<<std::endl;
+//return -1;
+}
+capture.set(CV_CAP_PROP_FRAME_WIDTH,320);
+capture.set(CV_CAP_PROP_FRAME_HEIGHT,240);
+}
