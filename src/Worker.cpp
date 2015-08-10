@@ -5,6 +5,7 @@
  *      Author: fero
  */
 #include "main.hpp"
+#define BRD_BUILD 
 #ifdef BRD_BUILD
 #include <wiringPi.h>
 #endif
@@ -44,4 +45,14 @@ Worker::Worker(){
 	system("for A in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do echo \"$A\" > /sys/class/gpio/export ; done ");
 	system("echo out > /sys/class/gpio/gpio6_pe6/direction");
 	*/
+}
+
+void * Worker::detector(void * param){
+
+while(1){
+#ifdef BRD_BUILD
+	if(!digitalRead(1)) //Przyjęto LOW na pinie GPIO1 jako stan drzwi zamknięty
+	SigW(2,NULL);
+#endif
+}
 }
