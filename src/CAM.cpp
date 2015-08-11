@@ -19,15 +19,24 @@ vector<Rect> faces;
 
 void * detector(void *);
 
-int main(){
+int main(int argc, char **argv){
 	pthread_t tid;
 	pthread_attr_t attr;
 	pthread_attr_init(&attr);
 	if(pthread_create(&tid,&attr,detector,NULL)){
 std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 }
+	if(argc < 3)
+	{
+		Controller k(atoi(argv[1]),atoi(argv[2]));
+		k.modules[0]->work();
+
+	}
+	else{
 	Controller k;
 	k.modules[0]->work();
+
+	}
 
 //	k.modules[1]
 

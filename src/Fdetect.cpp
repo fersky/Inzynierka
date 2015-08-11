@@ -105,6 +105,6 @@ if(!capture.isOpened()){
 std::cout<<"cannot open camera!"<<std::endl;
 //return -1;
 }
-capture.set(CV_CAP_PROP_FRAME_WIDTH,320);
-capture.set(CV_CAP_PROP_FRAME_HEIGHT,240);
+capture.set(CV_CAP_PROP_FRAME_WIDTH,k->cam_w);
+capture.set(CV_CAP_PROP_FRAME_HEIGHT,k->cam_h);
 }

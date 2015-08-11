@@ -50,7 +50,8 @@ default :
 return false;
 }
 
-Controller::Controller(){
+Controller::Controller(int w,int h):
+	cam_w(w),cam_h(h){
 	modules[FD]=new Fdetect(this);
 	modules[LG]=new Logger;
 	modules[WR]=new Worker;

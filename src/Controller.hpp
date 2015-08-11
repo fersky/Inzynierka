@@ -11,8 +11,10 @@
 
 class Controller{
 public:
+	int cam_w,cam_h;
 	boost::signal <bool(void *wsk)>SigC;
-Controller();
+Controller(int w=320,int h=240);
+//Controller();
 bool detected;
 	Module * modules[3];
  bool lunit(int nr,void* wsk);
