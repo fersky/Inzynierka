@@ -89,6 +89,7 @@ while(1){
 
 #ifdef BRD_BUILD
 	if(!digitalRead(1)) //Przyjęto LOW na pinie GPIO1 jako stan drzwi zamknięty
+	;
 #endif
 	//	SigW(2,NULL);
 
