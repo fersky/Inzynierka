@@ -8,7 +8,7 @@
 #ifndef MAIN_HPP_
 #define MAIN_HPP_
 #define TIME_TEST
-
+#define BRD_BUILD
 #define FD 0
 #define WR 2
 #define LG 1
@@ -42,5 +42,7 @@
 #include <vector>
 #include <string.h>
 #include <assert.h>
-
+#ifdef BRD_BUILD
+#include <wiringPi.h>
+#endif
 #endif /* MAIN_HPP_ */
