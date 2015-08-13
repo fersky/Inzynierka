@@ -64,7 +64,7 @@ bool Object_Detection::work(void*){
 
 		  if(1)
 		  {
-		    while(on)
+		    while(enabled)
 		    {
 		 // frame = cvQueryFrame( capture );
 		 capture.read(frame);
@@ -91,7 +91,7 @@ bool Object_Detection::work(void*){
 Object_Detection::~Object_Detection(){}
 Object_Detection::Object_Detection(Controller * k){
 	name="OBJECT DETECTION";
-on=true;
+enabled=true;
 cv::String face_cascade_name = "data/haarcascade_frontalface_alt.xml";
 cv::String eyes_cascade_name = "data/haarcascade_eye_tree_eyeglasses.xml";
 window_name = "Capture - Face detection";

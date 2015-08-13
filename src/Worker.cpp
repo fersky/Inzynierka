@@ -6,10 +6,7 @@
  */
 #include "main.hpp"
 
-//#define BRD_BUILD
-#ifdef BRD_BUILD
-#include <wiringPi.h>
-#endif
+
 
 bool Worker::work(void* wsk){
 

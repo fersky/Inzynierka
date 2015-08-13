@@ -32,8 +32,9 @@ std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 
 	Time_Test test;
 	Controller k;
-	Module *ptr [3]={k.modules[FD],k.modules[WR], k.modules[LG]};
+    Module *ptr []={k.modules[FD],k.modules[WR], k.modules[LG],NULL};
 	test.add(ptr);
+<<<<<<< HEAD
 	test.measure_time(atoi(argv[1]));
 	//blok czasowy
 	/*
@@ -64,6 +65,10 @@ total_time += time_span;
 
 	  //koniec bloku czasowego
 */
+=======
+	test.measure_time();
+	test.display_results();
+>>>>>>> dafde4d2a81bb548889f69d781dfc8cd43925a4d
 #else
 
 
