@@ -36,6 +36,10 @@ std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 	test.add(ptr);
 	test.measure_time(atoi(argv[1]));
 	test.display_results();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60c89a96216ab0c2086ea40dd6ee8575ecb81f68
 #else
 
 
