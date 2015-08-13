@@ -34,7 +34,7 @@ std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 	Controller k;
 	Module *ptr [3]={k.modules[FD],k.modules[WR], k.modules[LG]};
 	test.add(ptr);
-	test.measure_time();
+	test.measure_time(atoi(argv[1]));
 	//blok czasowy
 	/*
 	Controller k;

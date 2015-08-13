@@ -20,7 +20,7 @@ private:
 
 public:
 	void add(Module **);
-	bool measure_time();
+	bool measure_time(int b);
 };
 
 
