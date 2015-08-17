@@ -5,19 +5,27 @@
 // Copyright   : Your copyright notice
 // Description : Fast, Intelligent Camera with Ethernet Interface
 //============================================================================
+
+
 #include "main.hpp"
 #include <pthread.h>
+#include <ctime>
+#include <ratio>
+#include <chrono>
+#include <vector>
+#include <string.h>
+#include <assert.h>
 
 using namespace std;
 using namespace boost;
 using namespace cv;
-/** Function Headers */
+using namespace chrono;
 
 
-/** Global variables */
 vector<Rect> faces;
-
+extern cv::Mat test_frame;
 void * detector(void *);
+
 
 int main(int argc, char **argv){
 	pthread_t tid;
@@ -26,21 +34,49 @@ int main(int argc, char **argv){
 	if(pthread_create(&tid,&attr,detector,NULL)){
 std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 }
+#ifdef TIME_TEST
+	//blok czasowy
+Controller k;
+	Module *ptr [3]={k.modules[FD],k.modules[WR], k.modules[LG]};
+	std::vector <Module*> wektor;
+	std::vector <duration<double>> times;
+	printf("Start testów czasowych \n");
+	for (int i=0; i<3; i++)
+		wektor.push_back(ptr[i]);
+	high_resolution_clock::time_point t1;
+	high_resolution_clock::time_point t2 ;
+	duration<double>  time_span,total_time;
+	  for (int i=0; i<3; ++i){
+		   t1 = high_resolution_clock::now();
+		 assert(! wektor[i]->work());
+		 t2 = high_resolution_clock::now();
+		 time_span  = duration_cast<nanoseconds>(t2 - t1);
+		 times.push_back(time_span);
+total_time= total_time + time_span;
+	  }
+
+	  for (int i=0; i<3; i++)
+	  	std::cout<<"Czas działania modułu "<<wektor[i]->name+"\t"<< duration_cast<nanoseconds>(times[i]).count()<<endl;
+
+	  std::cout << "Total time " << duration_cast<milliseconds>(total_time).count()<< " miliseconds.";
+	  std::cout << std::endl;
+
+	  //koniec bloku czasowego
+#else
+
+
 	if(argc < 3)
 	{
-		Controller k(atoi(argv[1]),atoi(argv[2]));
-		k.modules[0]->work();
+		Controller C;
+		C.modules[0]->work();
 
 	}
 	else{
-	Controller k;
-	k.modules[0]->work();
+	Controller C(atoi(argv[1]),atoi(argv[2]),atoi(argv[3]));
+	C.modules[0]->work();
 
 	}
-
-//	k.modules[1]
-
-
+#endif
 
 	return 0;
 }
@@ -51,8 +87,10 @@ while(1){
 
 #ifdef BRD_BUILD
 	if(!digitalRead(1)) //Przyjęto LOW na pinie GPIO1 jako stan drzwi zamknięty
-	SigW(2,NULL);
 #endif
+	//	SigW(2,NULL);
+
 }
 }
+
 

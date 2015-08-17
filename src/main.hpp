@@ -7,7 +7,11 @@
 
 #ifndef MAIN_HPP_
 #define MAIN_HPP_
+#define TIME_TEST
 
+#define FD 0
+#define WR 2
+#define LG 1
 
 #include <boost/signal.hpp>
 #include <boost/bind.hpp>
@@ -26,7 +30,7 @@
 
 #include "Module.hpp"
 #include "Controller.hpp"
-#include "Fdetect.hpp"
+#include "Object_Detection.hpp"
 #include "Logger.hpp"
 #include "Worker.hpp"
 

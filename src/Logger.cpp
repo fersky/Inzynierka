@@ -8,10 +8,15 @@
 
 #include "main.hpp"
 extern std::vector<cv::Rect> faces;
+extern cv::Mat test_frame;
 bool Logger::work(void* wsk){
 	std::cout<<name<<" RUNNING"<<std::endl;
 	std::ofstream log;
+
 	frame = (cv::Mat*)(wsk);
+#ifdef TIME_TEST
+frame = &test_frame;
+#endif
 	log.open("/var/www/html/log.txt",std::ios::out | std::ios::app);
 
 	if(!log.is_open())
@@ -55,4 +60,7 @@ strftime(buf,sizeof(buf),"X%Y-%m-%d.%X",now);
 return buf;
 }
 
-Logger::Logger(){name="LOGGER";}
+Logger::Logger(){
+	name="LOGGER";
+	frame=0;
+}
