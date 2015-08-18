@@ -9,10 +9,10 @@ using namespace std;
 using namespace chrono;
 
 void Time_Test::add(Module **pointer){
-	ptr=pointer;
+	//ptr=pointer;
 int i;
 	for (i=0; i<3; i++)
-		wektor.push_back(ptr[i]);
+		wektor.push_back(pointer[i]);
 	module_nr=i;
 	std::cout<<"\n Dodano "<<module_nr<< " moduły"<<std::endl;
 }
@@ -21,7 +21,7 @@ int i;
 
 bool Time_Test::measure_time(){
 
-	Controller k;
+
 	printf("Start testów czasowych \n");
 	high_resolution_clock::time_point t1;
 	high_resolution_clock::time_point t2 ;

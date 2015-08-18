@@ -29,13 +29,14 @@ int main(int argc, char **argv){
 std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 }
 #ifdef TIME_TEST
+
 	Time_Test test;
 	Controller k;
 	Module *ptr [3]={k.modules[FD],k.modules[WR], k.modules[LG]};
 	test.add(ptr);
 	test.measure_time();
 	//blok czasowy
-/*
+	/*
 	Controller k;
 	Module *ptr [3]={k.modules[FD],k.modules[WR], k.modules[LG]};
 	std::vector <Module*> wektor;
@@ -62,9 +63,7 @@ total_time += time_span;
 	  std::cout << std::endl;
 
 	  //koniec bloku czasowego
-	   *
-	   */
-
+*/
 #else
 
 
