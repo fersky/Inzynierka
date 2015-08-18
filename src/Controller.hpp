@@ -15,9 +15,8 @@ public:
 	int cam_w,cam_h,latency;
 	boost::signal <bool(void *wsk)>SigC;
 Controller(int w=320,int h=240,int l=2000);
-//Controller();
 bool detected;
-	Module * modules[3];
+Module * modules[3];
  bool logicUnit(int nr,void* wsk);
 
  ~Controller();

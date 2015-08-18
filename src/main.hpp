@@ -33,5 +33,14 @@
 #include "Object_Detection.hpp"
 #include "Logger.hpp"
 #include "Worker.hpp"
+#include "Time_Test.hpp"
+
+#include <pthread.h>
+#include <ctime>
+#include <ratio>
+#include <chrono>
+#include <vector>
+#include <string.h>
+#include <assert.h>
 
 #endif /* MAIN_HPP_ */

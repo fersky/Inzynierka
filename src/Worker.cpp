@@ -15,7 +15,7 @@ bool Worker::work(void* wsk){
 
 	std::cout<<name<<" RUNNING"<<std::endl;
 #ifndef TIME_TEST
-int state= *((int*)(wsk));
+int state= *(static_cast<int*>(wsk));
 #else
 int state = 0;
 #endif
@@ -23,7 +23,7 @@ int state = 0;
 #ifdef BRD_BUILD
 	digitalWrite(0,HIGH);
 #endif
-	std::cout<<"\n WORKER ustawia stan WYSOKI"<<std::endl; //otwórz drzwi
+	std::cout<<"WORKER sets HIGH state"<<std::endl; //otwórz drzwi
 #ifndef TIME_TEST
 	SigW(2,wsk);
 #endif
@@ -32,7 +32,7 @@ else if (state == 2){
 #ifdef BRD_BUILD
 	digitalWrite(0,LOW);
 #endif
-	std::cout<<"\n WORKER ustawia stan NISKI"<<std::endl; //zamknij drzwi
+	std::cout<<"WORKER sets LOW state"<<std::endl; //zamknij drzwi
 #ifndef TIME_TEST
 	SigW(2,wsk);
 #endif

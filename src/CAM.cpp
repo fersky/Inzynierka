@@ -8,13 +8,7 @@
 
 
 #include "main.hpp"
-#include <pthread.h>
-#include <ctime>
-#include <ratio>
-#include <chrono>
-#include <vector>
-#include <string.h>
-#include <assert.h>
+
 
 using namespace std;
 using namespace boost;
@@ -35,8 +29,14 @@ int main(int argc, char **argv){
 std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 }
 #ifdef TIME_TEST
+	Time_Test test;
+	Controller k;
+	Module *ptr [3]={k.modules[FD],k.modules[WR], k.modules[LG]};
+	test.add(ptr);
+	test.measure_time();
 	//blok czasowy
-Controller k;
+/*
+	Controller k;
 	Module *ptr [3]={k.modules[FD],k.modules[WR], k.modules[LG]};
 	std::vector <Module*> wektor;
 	std::vector <duration<double>> times;
@@ -52,7 +52,7 @@ Controller k;
 		 t2 = high_resolution_clock::now();
 		 time_span  = duration_cast<nanoseconds>(t2 - t1);
 		 times.push_back(time_span);
-total_time= total_time + time_span;
+total_time += time_span;
 	  }
 
 	  for (int i=0; i<3; i++)
@@ -62,6 +62,9 @@ total_time= total_time + time_span;
 	  std::cout << std::endl;
 
 	  //koniec bloku czasowego
+	   *
+	   */
+
 #else
 
 
