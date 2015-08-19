@@ -12,8 +12,12 @@
 //#define BRD_BUILD
 =======
 #define TIME_TEST
+<<<<<<< HEAD
+//#define BRD_BUILD
+=======
 #define BRD_BUILD
 >>>>>>> fb18ddeddd90a1831a8ae69cf6e0f861230bf89c
+>>>>>>> dafde4d2a81bb548889f69d781dfc8cd43925a4d
 #define FD 0
 #define WR 2
 #define LG 1
