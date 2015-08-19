@@ -17,7 +17,12 @@ private:
 
 public:
 	void add(Module **);
+<<<<<<< HEAD
+	void measure_time(int b);
+	bool measure_time();
+=======
 	void measure_time(int n);
+>>>>>>> 60c89a96216ab0c2086ea40dd6ee8575ecb81f68
 	void display_results();
 };
 
