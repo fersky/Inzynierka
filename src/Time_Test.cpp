@@ -7,13 +7,12 @@
 #include "main.hpp"
 using namespace std;
 using namespace chrono;
-<<<<<<< HEAD
-int c=0;
-=======
-duration<double>  time_span,total_time;
-	vector <duration<double>> times;
 
->>>>>>> dafde4d2a81bb548889f69d781dfc8cd43925a4d
+int c=0;
+
+duration<double>  time_span,total_time;
+vector <duration<double>> times;
+
 void Time_Test::add(Module **pointer){
 int i;
 	for (i=0; pointer[i]!= NULL; ++i)
@@ -24,25 +23,20 @@ int i;
 
 
 
-bool Time_Test::measure_time(int b){
+void Time_Test::measure_time(int n){
 
 
 	printf("Start of time tests \n");
 	high_resolution_clock::time_point t1;
 	high_resolution_clock::time_point t2 ;
-<<<<<<< HEAD
 	duration<double>  time_span,total_time;
 	std::vector <std::chrono::duration<double>> times;
-printf("\nIlosc iteracji %d",b);
-=======
+	printf("\nNumber of iterations : %d",n);
 
-
-
->>>>>>> dafde4d2a81bb548889f69d781dfc8cd43925a4d
 		for (int i=0; i<module_nr; ++i){
 			 t1 = high_resolution_clock::now();
 c=0;
-while(c<b){	
+while(c<n){
 		 assert(! wektor[i]->work());
 c++;
 }	
@@ -51,17 +45,12 @@ c++;
 			 times.push_back(time_span);
 			 total_time += time_span;
 		  }
-
-<<<<<<< HEAD
 		  for (int i=0; i<3; i++)
-		  	std::cout<<"Czas działania modułu "<<wektor[i]->name+"\t"<< duration_cast<nanoseconds>(times[i]).count()/b<<std::endl;
+		  	std::cout<<"Czas działania modułu "<<wektor[i]->name+"\t"<< duration_cast<nanoseconds>(times[i]).count()/n<<std::endl;
 
-		  std::cout << "Total time " << duration_cast<milliseconds>(total_time).count()/b<< " miliseconds.";
+		  std::cout << "Total time " << duration_cast<milliseconds>(total_time).count()/n<< " miliseconds.";
 		  std::cout << std::endl;
-=======
 
->>>>>>> dafde4d2a81bb548889f69d781dfc8cd43925a4d
-	return 0;
 }
 void Time_Test::display_results(){
 	 for (int i=0; i<3; i++)

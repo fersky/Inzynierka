@@ -34,41 +34,9 @@ std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 	Controller k;
     Module *ptr []={k.modules[FD],k.modules[WR], k.modules[LG],NULL};
 	test.add(ptr);
-<<<<<<< HEAD
 	test.measure_time(atoi(argv[1]));
-	//blok czasowy
-	/*
-	Controller k;
-	Module *ptr [3]={k.modules[FD],k.modules[WR], k.modules[LG]};
-	std::vector <Module*> wektor;
-	std::vector <duration<double>> times;
-	printf("Start testów czasowych \n");
-	for (int i=0; i<3; i++)
-		wektor.push_back(ptr[i]);
-	high_resolution_clock::time_point t1;
-	high_resolution_clock::time_point t2 ;
-	duration<double>  time_span,total_time;
-	  for (int i=0; i<3; ++i){
-		   t1 = high_resolution_clock::now();
-		 assert(! wektor[i]->work());
-		 t2 = high_resolution_clock::now();
-		 time_span  = duration_cast<nanoseconds>(t2 - t1);
-		 times.push_back(time_span);
-total_time += time_span;
-	  }
-
-	  for (int i=0; i<3; i++)
-	  	std::cout<<"Czas działania modułu "<<wektor[i]->name+"\t"<< duration_cast<nanoseconds>(times[i]).count()<<endl;
-
-	  std::cout << "Total time " << duration_cast<milliseconds>(total_time).count()<< " miliseconds.";
-	  std::cout << std::endl;
-
-	  //koniec bloku czasowego
-*/
-=======
-	test.measure_time();
 	test.display_results();
->>>>>>> dafde4d2a81bb548889f69d781dfc8cd43925a4d
+
 #else
 
 
