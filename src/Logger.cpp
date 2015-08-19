@@ -8,14 +8,19 @@
 
 #include "main.hpp"
 extern std::vector<cv::Rect> faces;
+extern cv::Mat test_frame;
 bool Logger::work(void* wsk){
 	std::cout<<name<<" RUNNING"<<std::endl;
 	std::ofstream log;
+
 	frame = (cv::Mat*)(wsk);
+#ifdef TIME_TEST
+frame = &test_frame;
+#endif
 	log.open("/var/www/html/log.txt",std::ios::out | std::ios::app);
 
 	if(!log.is_open())
-	  std::cout<<"BLAD ODCZYTU PLIKU LOGOW"<<std::endl;
+	  std::cout<<"ERROR READING LOG FILE"<<std::endl;
 
 	for(int i=0; i<faces.size();i++){
 
@@ -37,7 +42,7 @@ bool Logger::work(void* wsk){
 	    printf("%s \n",path.c_str());
 
 	    if( !imwrite(path,face))
-	    	std::cout<<"BLAD ZAPISU OBRAZU DO PLIKU";
+	    	std::cout<<"ERROR WRITING IMAGE TO FILE"<<std::endl;
 
 	}
 
@@ -55,4 +60,7 @@ strftime(buf,sizeof(buf),"X%Y-%m-%d.%X",now);
 return buf;
 }
 
-Logger::Logger(){name="LOGGER";}
+Logger::Logger(){
+	name="LOGGER";
+	frame=0;
+}

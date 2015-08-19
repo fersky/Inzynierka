@@ -5,33 +5,52 @@
 // Copyright   : Your copyright notice
 // Description : Fast, Intelligent Camera with Ethernet Interface
 //============================================================================
+
+
 #include "main.hpp"
-#include <pthread.h>
+
 
 using namespace std;
 using namespace boost;
 using namespace cv;
-/** Function Headers */
+using namespace chrono;
 
 
-/** Global variables */
 vector<Rect> faces;
-
+extern cv::Mat test_frame;
 void * detector(void *);
 
-int main(){
+
+int main(int argc, char **argv){
 	pthread_t tid;
 	pthread_attr_t attr;
 	pthread_attr_init(&attr);
 	if(pthread_create(&tid,&attr,detector,NULL)){
 std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 }
+#ifdef TIME_TEST
+
+	Time_Test test;
 	Controller k;
-	k.modules[0]->work();
+    Module *ptr []={k.modules[FD],k.modules[WR], k.modules[LG],NULL};
+	test.add(ptr);
+	test.measure_time();
+	test.display_results();
+#else
 
-//	k.modules[1]
 
+	if(argc < 3)
+	{
+		Controller C;
+		C.modules[0]->work();
 
+	}
+	else{
+	Controller C(atoi(argv[1]),atoi(argv[2]),atoi(argv[3]));
+	C.modules[0]->work();
+
+	}
+#endif
 
 	return 0;
 }
@@ -42,8 +61,11 @@ while(1){
 
 #ifdef BRD_BUILD
 	if(!digitalRead(1)) //Przyjęto LOW na pinie GPIO1 jako stan drzwi zamknięty
-	SigW(2,NULL);
+	;
 #endif
+	//	SigW(2,NULL);
+
 }
 }
+
 

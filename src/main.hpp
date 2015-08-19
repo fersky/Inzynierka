@@ -7,7 +7,16 @@
 
 #ifndef MAIN_HPP_
 #define MAIN_HPP_
-
+<<<<<<< HEAD
+//#define TIME_TEST
+//#define BRD_BUILD
+=======
+#define TIME_TEST
+#define BRD_BUILD
+>>>>>>> fb18ddeddd90a1831a8ae69cf6e0f861230bf89c
+#define FD 0
+#define WR 2
+#define LG 1
 
 #include <boost/signal.hpp>
 #include <boost/bind.hpp>
@@ -26,8 +35,19 @@
 
 #include "Module.hpp"
 #include "Controller.hpp"
-#include "Fdetect.hpp"
+#include "Object_Detection.hpp"
 #include "Logger.hpp"
 #include "Worker.hpp"
+#include "Time_Test.hpp"
 
+#include <pthread.h>
+#include <ctime>
+#include <ratio>
+#include <chrono>
+#include <vector>
+#include <string.h>
+#include <assert.h>
+#ifdef BRD_BUILD
+#include <wiringPi.h>
+#endif
 #endif /* MAIN_HPP_ */

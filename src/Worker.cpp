@@ -6,30 +6,33 @@
  */
 #include "main.hpp"
 
-//#define BRD_BUILD
-#ifdef BRD_BUILD
-#include <wiringPi.h>
-#endif
+
 
 bool Worker::work(void* wsk){
 
 	std::cout<<name<<" RUNNING"<<std::endl;
-
-	int state= *((int*)(wsk));
-
-		if(state == 1){
+#ifndef TIME_TEST
+int state= *(static_cast<int*>(wsk));
+#else
+int state = 0;
+#endif
+		if(state == 0){
 #ifdef BRD_BUILD
 	digitalWrite(0,HIGH);
 #endif
-	std::cout<<"\n WORKER ustawia stan WYSOKI"<<std::endl; //otwórz drzwi
+	std::cout<<"WORKER sets HIGH state"<<std::endl; //otwórz drzwi
+#ifndef TIME_TEST
 	SigW(2,wsk);
+#endif
 }
 else if (state == 2){
 #ifdef BRD_BUILD
 	digitalWrite(0,LOW);
 #endif
-	std::cout<<"\n WORKER ustawia stan NISKI"<<std::endl; //zamknij drzwi
+	std::cout<<"WORKER sets LOW state"<<std::endl; //zamknij drzwi
+#ifndef TIME_TEST
 	SigW(2,wsk);
+#endif
 }
 else
 {}

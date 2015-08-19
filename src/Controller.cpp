@@ -5,12 +5,10 @@
  *      Author: fero
  */
 #include "main.hpp"
-#define FD 0
-#define WR 2
-#define LG 1
-bool Controller::lunit(int nr,void* wsk){
-	int state= -1;
 
+bool Controller::logicUnit(int nr,void* wsk){
+	int state= -1;
+	int * notification;
 	std::cout<<"CONTROLLER "<<"RECEIVED SIGNAL : " << nr<<std::endl;
 switch (nr){
 case FD :
@@ -23,10 +21,11 @@ case FD :
 
 	modules[LG]->work(wsk);//Logger runs send
 	modules[WR]->work(&state);//Worker runs and sends HIGH state
-//	modules[FD]->on=false; //Fdetect stops
+//	modules[FD]->on=false; //Object_Detection stops
 	}
 	else{
-		sleep(2);
+
+		usleep(latency*1000);
 		detected=true;
 		}
 
@@ -35,12 +34,14 @@ case LG:					//signal from Logger
 
 	break;
 
-case WR:					//signal from Worker
-//TODO: sygnał do Fdetect? : STOP
-	if(*(int*)(wsk)==2)//drzwi zamkniete
-modules[FD]->on=false;
+case WR:
+	//signal from Worker
+	 notification = static_cast<int*>(wsk);
+//TODO: sygnał do Object_Detection? : STOP
+	if(*notification==2)//drzwi zamkniete
+modules[FD]->enabled=false;
 	else
-		modules[FD]->on=true;
+		modules[FD]->enabled=true;
 	break;
 default :
 ;
@@ -50,15 +51,19 @@ default :
 return false;
 }
 
-Controller::Controller(){
-	modules[FD]=new Fdetect(this);
+Controller::Controller(int w,int h,int l):
+	cam_w(w),cam_h(h),latency(l){
+	modules[FD]=new Object_Detection(this);
 	modules[LG]=new Logger;
 	modules[WR]=new Worker;
 	detected=false;
+	//sygnał do workera definicja
 	SigC.connect(bind(&Module::work,modules[WR],_1));
-	//(*(this->modules[0])).SigW.connect(bind(&Controller::lunit,this,_1, _2));
-	(*(this->modules[1])).SigW.connect(bind(&Controller::lunit,this,_1 , _2));
-	(*(this->modules[2])).SigW.connect(bind(&Controller::lunit,this,_1 , _2));
+	//(*(this->modules[0])).SigW.connect(bind(&Controller::logicUnit,this,_1, _2));
+	//sloty obiektów object detection i logger
+	c_obd = (*(this->modules[FD])).SigW.connect(bind(&Controller::logicUnit,this,_1, _2));
+	c_log = (*(this->modules[LG])).SigW.connect(bind(&Controller::logicUnit,this,_1 , _2));
+	c_wor = (*(this->modules[WR])).SigW.connect(bind(&Controller::logicUnit,this,_1 , _2));
 }
 Controller::~Controller(){
 	delete  [] modules;
