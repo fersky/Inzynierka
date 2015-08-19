@@ -12,18 +12,19 @@
 class Controller{
 public:
 	typedef boost::signals::connection conn;
-	int cam_w,cam_h,latency;
+	short int cam_w,cam_h,latency;
 	boost::signal <bool(void *wsk)>SigC;
-Controller(int w=320,int h=240,int l=2000);
-bool detected;
-Module * modules[3];
- bool logicUnit(int nr,void* wsk);
+	bool detected;
 
- ~Controller();
+	Module * modules[3];
+	bool logicUnit(int nr,void* wsk);
+	Controller(int w=320,int h=240,int l=2000);
+	~Controller();
+
 private:
- conn c_obd;
- conn c_wor;
- conn c_log;
+	conn c_obd;
+	conn c_wor;
+	conn c_log;
 };
 
 

@@ -14,7 +14,7 @@ public:
 	virtual bool work(void*wsk=0)=0;
 	virtual ~Module(){};
 	boost::signal<bool(int nr,void* wsk)> SigW;
-	bool on;
+	bool enabled;
 };
 
 

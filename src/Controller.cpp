@@ -39,9 +39,9 @@ case WR:
 	 notification = static_cast<int*>(wsk);
 //TODO: sygnał do Object_Detection? : STOP
 	if(*notification==2)//drzwi zamkniete
-modules[FD]->on=false;
+modules[FD]->enabled=false;
 	else
-		modules[FD]->on=true;
+		modules[FD]->enabled=true;
 	break;
 default :
 ;
