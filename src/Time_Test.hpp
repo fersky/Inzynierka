@@ -14,6 +14,7 @@ class Time_Test{
 private:
 	int module_nr;
 	std::vector <Module*> wektor;
+	int N;
 
 public:
 	void add(Module **);

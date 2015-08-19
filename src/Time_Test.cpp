@@ -31,7 +31,8 @@ void Time_Test::measure_time(int n){
 	high_resolution_clock::time_point t2 ;
 	duration<double>  time_span,total_time;
 	std::vector <std::chrono::duration<double>> times;
-	printf("\nNumber of iterations : %d",n);
+	N=n;
+	printf("\nNumber of iterations : %d",N);
 
 		for (int i=0; i<module_nr; ++i){
 			 t1 = high_resolution_clock::now();
@@ -45,16 +46,12 @@ c++;
 			 times.push_back(time_span);
 			 total_time += time_span;
 		  }
-		  for (int i=0; i<3; i++)
-		  	std::cout<<"Czas działania modułu "<<wektor[i]->name+"\t"<< duration_cast<nanoseconds>(times[i]).count()/n<<std::endl;
 
-		  std::cout << "Total time " << duration_cast<milliseconds>(total_time).count()/n<< " miliseconds.";
-		  std::cout << std::endl;
 
 }
 void Time_Test::display_results(){
-	 for (int i=0; i<3; i++)
-			  std::cout<<"Execution time of module "<<wektor[i]->name+"\t : "<< duration_cast<nanoseconds>(times[i]).count()<<" ns"<<std::endl;
-			  std::cout << "Total time : " << duration_cast<milliseconds>(total_time).count()<< " ms"<<endl;
+	 for (int i=0; i<module_nr; i++)
+			  std::cout<<"Execution time of module "<<wektor[i]->name+"\t : "<< duration_cast<nanoseconds>(times[i]).count()/N<<" ns"<<std::endl;
+			  std::cout << "Total time : " << duration_cast<milliseconds>(total_time).count()/N<< " ms"<<endl;
 			  std::cout << std::endl;
 }
