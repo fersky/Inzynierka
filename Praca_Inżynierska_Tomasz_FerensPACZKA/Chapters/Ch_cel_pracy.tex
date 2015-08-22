@@ -1,0 +1,34 @@
+% Chapter cel pracy
+
+\chapter{Cel i założenia pracy} % Chapter title
+
+%\label{ch:name} % For referencing the chapter elsewhere, use \autoref{ch:name} 
+
+ 
+Praca ma na celu zbadania możliwości wykonania projektu Szybkiej, Inteligentnej kamery z interfejsem Ethernet na systemie wbudowanym (ang. embedded system).
+Kamerę stosować można będzie np. do monitorowania przestrzeni przemysłowej, a także w komunikacji miejskiej, czy też w zastosowaniach domowych. Docelowo użytkownikiem mają być osoby indywidualne, aczkolwiek system jest elastyczny, wobec czego łatwo można go zmodyfikować także pod kątem bardziej specjalistycznych zastosowań.
+Projekt stanowi podstawę do realizacji dużo większego systemu – sieci kamer połączonych ze sobą, np. pod kontrolą serwera i umożliwiających realizację bardziej złożonych zadań, jak np. śledzenie trasy danej osoby, czy też kontrolowanie jednocześnie kilku obszarów w hali produkcyjnej.
+
+\begin{description}
+\item Założenia projektu :
+	\begin{itemize}[noitemsep]
+	\item Inteligencja dostosowana do wymogów monitoringu – zaimplementowana logika pozwala kamerze rozpoznać określone obiekty oraz wykonywać samodzielnie akcje, sterować układem zewnętrznym
+	\item Maksymalizacja prędkości działania
+\item Modularność – struktura oprogramowania ma być łatwa do rozbudowy i debugowania
+\item Komunikacja z użytkownikiem.
+		\end{itemize}
+\end{description}
+
+Do komunikacji z użytkownikiem wykorzystany zostanie serwer http, na którym będą umieszczane przez aplikację logi (zdjęcie osoby i data wykonania akcji). Natomiast sterowanie innymi urządzeniami zrealizowane jest poprzez wystawienie stanów HIGH/LOW na wyjściach portów GPIO.
+
+\begin{description}
+\item Na wykonanie projektu składa się:
+\begin{itemize}[noitemsep]
+\item Praca koncepcyjna
+\item Konfiguracja systemu 
+\item Połączenie podzespołów : płyty z układem sterowanym
+\item Napisanie aplikacji uruchamianej na płycie
+\item Skonfigurowanie serwera http i przygotowanie skryptu PHP/jQuery
+\item Wykonanie testów działania projektu.
+\end{itemize}
+\end{description}

@@ -1,0 +1,123 @@
+%dużo bibliotek ale niech zostają nie chce mi się poprawiać
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{wrapfig}
+%\usepackage{listings}
+\usepackage{xcolor}
+%\lstset{language=C}
+\usepackage{fancyhdr}
+
+\usepackage{moreverb}
+\usepackage{booktabs}
+\usepackage{eurosym}
+\usepackage{indentfirst}
+\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{float}
+\usepackage{tocloft}
+\usepackage{color}
+%\usepackage{xcolor,colortbl}
+%\usepackage{mathtools}
+%\usepackage{tablefootnote}
+\usepackage{setspace}\setstretch{1.15} %było 1.2
+\usepackage{tabularx}
+%\usepackage{tgtermes}
+\usepackage[titletoc]{appendix}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\setlist[1]{itemsep=-5pt}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\usepackage{color, colortbl}
+\usepackage{array}
+\usepackage{ragged2e}
+\newcolumntype{P}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
+%----------------------------------------------------------------------------------------
+%	HYPERREFERENCES
+%----------------------------------------------------------------------------------------
+\usepackage{hyperref}  % backref linktocpage pagebackref
+
+\usepackage{tabularx} % Better tables
+
+\usepackage{enumitem} % Required for manipulating the whitespace between and within lists
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+% LISTING
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=VHDL,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+\renewcommand\lstlistingname{Wydruk}
+\renewcommand\lstlistlistingname{Wydruki}
+\renewcommand\listfigurename{{\LARGE Rysunki}}
+\renewcommand{\figurename}{Rys.}
+\renewcommand\tablename{Tab.}
+
+\renewcommand{\listtablename}{{\LARGE Tablice}}
+\renewcommand{\bibname}{Literatura}
+
+
+%    Abstract: \abstractname
+%    Appendix: \appendixname
+%    Bibliography: \bibname
+%    Chapter: \chaptername
+%    Contents: \contentsname
+%    Index: \indexname
+%    List of Figures: \listfigurename
+%    List of Tables: \listtablename
+%    Part: \partname
+%    References: \refname
+
+% Nie pozostawia na końcu wdów i sierot
+\usepackage{lettrine}\sloppy %zakaz wydłużania lini (gdzy nie może złożyć) 
+\clubpenalty=10000 %nie dieli wyrazów pomiędzy stronami 
+\widowpenalty=10000 %nie pozostawia wdów i sierot pojedynczych 
+\usepackage{fancyhdr}
+
+\usepackage{pdfpages}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+%---------------------------------------------------------------
