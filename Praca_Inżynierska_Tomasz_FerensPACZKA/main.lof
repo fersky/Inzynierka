@@ -1,0 +1,30 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Rejestrator BCS-NVT0802}}{6}{figure.caption.3}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Kamera sieciowa BCS-TIP7300IR}}{6}{figure.caption.4}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Raspberry Pi w wersji 2}}{8}{figure.caption.6}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces BeagleBone Black Rev. C}}{8}{figure.caption.7}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces OlinuXino Micro A13}}{9}{figure.caption.8}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Wandboard}}{10}{figure.caption.9}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Architektura systemu Linux.}}{12}{figure.caption.11}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Windows Embedded 7}}{13}{figure.caption.12}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Koncepcja og\IeC {\'o}lna projektu}}{18}{figure.caption.13}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Cechy Haara i wykorzystanie cech Haara do detekcji twarzy.}}{19}{figure.caption.15}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Obliczanie sumy warto\IeC {\'s}ci pixeli fragmentu obrazu}}{20}{figure.caption.17}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Kaskada klasyfikator\IeC {\'o}w dla N etap\IeC {\'o}w.}}{21}{figure.caption.20}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Schemat trenowania klasyfikatora}}{22}{figure.caption.21}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Koncepcja sterowania urz\IeC {\k a}dzeniem zewn\IeC {\k e}trznym}}{22}{figure.caption.22}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Koncepcja interfejsu komunikacji z u\IeC {\.z}ytkownikiem}}{23}{figure.caption.24}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Algorytm g\IeC {\l }\IeC {\'o}wny aplikacji.}}{33}{figure.caption.25}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagram wsp\IeC {\'o}\IeC {\l }pracy obiekt\IeC {\'o}w}}{34}{figure.caption.26}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram klas roboczych}}{34}{figure.caption.28}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Schemat dzia\IeC {\l }ania modu\IeC {\l }u detekcji obiekt\IeC {\'o}w.}}{35}{figure.caption.30}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Schemat funkcjonalny modu\IeC {\l }u RaspiCam.}}{36}{figure.caption.37}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Mapowanie port\IeC {\'o}w GPIO biblioteki wiringPi.}}{44}{figure.caption.42}

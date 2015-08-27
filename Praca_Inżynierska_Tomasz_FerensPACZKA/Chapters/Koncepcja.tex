@@ -9,8 +9,8 @@ Szybkość działania kamery jest jednym z kluczowych założeń działania syst
 \item Czynniki składające się na ogólną szybkość działania kamery:
 	\begin{enumerate}[noitemsep]
 	\item Przetwarzanie obrazu przez sensor oraz protokół komunikacyjny między sensorem, a płytą.
-Według danych producenta czas potrzebny na wygenerowanie jednej klatki wynosi ok 1/30 s. Protokół zastosowany w kamerze, to równoległy, cechujący się czasem przesyłu na poziomie xx s.
-\item Przetwarzanie obrazu przez sterownik obrazu (kompresja danych)
+Według danych producenta czas potrzebny na wygenerowanie jednej klatki wynosi ok 1/90 s dla rozdzielczości strumienia 640x480. Protokół zastosowany w kamerze, to Camera Serial Interface wykorzystujący 2 linie danych umożliwiających maksymalną prędkość przesyłu na poziomie 2Gbps (1Gbps na linię).
+\item Przetwarzanie obrazu przez sterownik obrazu (kompresja danych).
 Czas ten jest uwarunkowany wydajnością akceleratora graficznego i  ze względu na wydajną jednostkę GPU VideoCore IV uznawany jest w projekcie za pomijalny.
 \item Przetwarzanie danych przez aplikację.
 Głównym czynnikiem mającym wpływ na ten czas jest algorytm zastosowany do detekcji twarzy. Dokładny jego opis znajduje się w rozdziale 3.6.1
@@ -21,8 +21,8 @@ Protokół Ethernet jest jednym z podstawowych interfejsów komunikacji urządze
 
 Ważnym aspektem są czas odpowiedzi systemu dla każdej z ww. operacji oraz ogólne czasy odpowiednio między wykryciem twarzy a : \\
 -akcją sprzętową (np. otwarciem drzwi, włączeniem alarmu)\\
--umieszczeniem logu na serwerze\\
-W projekcie przyjęto założenie, że czas między zdarzeniami określony będzie przez użytkownika. Rozdziały  4. i 5. aspekt ten opisują dokładniej.
+-umieszczeniem logu na serwerze.\\
+W projekcie przyjęto założenie, że w celu poprawy skuteczności detekcji obiektu minimalny czas między zdarzeniem wykrycia obiektu określony będzie przez użytkownika. Rozdział  4. aspekt ten opisuje dokładniej.
 
 \section{Inteligencja dostosowana do wymogów monitoringu}
 Inteligentny system monitorujący wymaga, aby oprócz dostarczania obrazu dokonać także jego przetworzenia – tj. za pomocą odpowiednich algorytmów dokonać detekcji żądanych obiektów.
@@ -63,7 +63,7 @@ Sekwencja działania jest zdefiniowana następująco :
 \item Implementacja: \\
 Implementacja komunikacji między obiektami zrealizowana jest z wykorzystaniem mechanizmu sygnałów biblioteki Boost. Daje to możliwość przekazania sterowania danemu obiektowi poprzez wywołanie funkcji obiektu zlecanego - zbindowanej w slocie wraz z przekazanym argumentem określonego typu.
 \item Testowanie: \\
-Ważnym aspektem poprawnej pracy systemu są testy. <uzupełnić>
+Ważnym aspektem poprawnej pracy systemu są testy. System musi spełniać nie tylko warunek poprawnego działania, ale też spełniać wymagania czasowe. Rozbieżności takie mogą w konsekwencji prowadzić do trudnych do wykrycia awarii, niekoniecznie urządzenia kamery ale np. urządzenia sterowanego, czy też powodować zakłamania w wynikach pracy kamery.
 Argumentem dla wyboru techniki OO jest fakt, iż system w przyszłości może realizować inne zadania/warunki, w konsekwencji aplikacja będzie potencjalnie modyfikowana i sukcesywnie rozbudowywana.
 \end{enumerate}
 \end{description}
@@ -173,8 +173,8 @@ gdzie Z- stały czynnik normalizujący.
 
 Podsumowując AdaBoost wykorzystuje te cechy, które są w stanie wykryć samodzielnie więcej niż połowe przypadków. Poprzez zmniejszanie wag cech poprawnie wykrywających obiekty i zwiększanie wag  cech, które sklasyfikowały obiekty błędnie, algorytm	 potrafi „skupić się” na trudnych przypadkach.	
 Klasyfikator zaproponowany przez autorów biblioteki OpenCV zawiera po wytrenowaniu około 6000 cech. Jest to ogromna redukcja względem wspomnianych 160 000,  jednakże wciąż zbyt dużo, aby zapewnić detekcję obiektu w krótkim czasie. Rozwiązaniem jest kaskada klasyfikatorów.
+\paragraph{Kaskada klasyfikatorów}
 
-Kaskada klasyfikatorów
 Większość z obszaru analizowanych obrazów nie zawiera twarzy. Stąd wyszedł pomysł,  aby ocenić czy obszar może zawierać twarz już na samym początku. Jeśli nie, odrzucić ten region, a skupić się na tych, które faktycznie mogą zawierać twarz. Taki zabieg pozwala oszczędzić mnóstwo czasu i zasobów sprzętowych.
 Zamiast sprawdzać wszystkie 6000 cech autorzy proponują podzielić proces detekcji na wiele etapów. W każdym z etapów są zgrupowane określone cechy nakładane jedna po drugiej, przy czym ilość cech sprawdzanych w kolejnych etapach rośnie. Jeśli obraz nie przejdzie początkowych etapów jest odrzucany i sprawdzany jest kolejny. Natomiast jeśli przejdzie wszystkie etapy – klasyfikowany jest jako twarz. Zasadę działania kaskady ilustruje rysunek \ref{fig:kaskada}.
 
@@ -195,7 +195,7 @@ Biblioteka OpenCV w pakiecie zawiera także narzędzia, które pozwalają samemu
 \end{figure}
 
 \subsection{ Sterowanie urządzeniem zewnętrznym}
-Sterowanie urządzeniami zewnętrznymi zrealizowane jest przez programowe wystawianie stanów logicznych na portach GPIO płyty. Pozwala to po zestawieniu z układem sterowanym na kontrolę urządzeniem. W projekcie płyta steruje układem z przekaźnikiem 12V. Jest to tylko przykład demonstracyjny czasu reakcji kamery. Sygnały cyfrowe można zastosować do dowolnego przeznaczenia np. włączenie alarmu, światła, klimatyzacji, powitania gościa...
+Sterowanie urządzeniami zewnętrznymi zrealizowane jest przez programowe wystawianie stanów logicznych na portach GPIO płyty. Pozwala to po zestawieniu z układem sterowanym na kontrolę urządzeniem. W projekcie znajduje się implementacja, która pozwala na zaadaptowanie kamery do sterowania urządzeniem zewnętrznym. Sygnały cyfrowe można zastosować do dowolnego przeznaczenia np. włączenie alarmu, światła, klimatyzacji, powitania gościa...
 
  \begin{figure}[bth]
 \centering

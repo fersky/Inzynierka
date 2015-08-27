@@ -1,9 +1,7 @@
 % Chapter IMPLEMENTACJA
 
 \chapter{Realizacja} % Chapter title
-
 Rozdział ten przedstawia opis szczegółowy koncepcji przedstawionych w rozdziale 3.
-
 \section{Oprogramowanie}
 \subsection{Narzędzia i środowisko pracy}
 Jako środowisko robocze wykorzystano system Ubuntu 14.04. Do stworzenia aplikacji użyte zostało środowisko programistyczne Eclipse Kepler. Dzięki wielu wtyczkom dostępnym do tego IDE (ang. Integrated Development Environment), możliwa była min. wygodna współpraca z systemem kontroli wersji GIT. System kontroli wersji pozwolił na bezpieczne rozwijanie projektu, wraz z możliwością śledzenia istotnych zmian.
@@ -32,10 +30,17 @@ Jako środowisko robocze wykorzystano system Ubuntu 14.04. Do stworzenia aplikac
 \end{description}
 W pracy wykorzystywane są dwa pierwsze, jednak wykorzystanie ostatniego z wymienionych daje możliwości rozszerzenia funkcjonalności kamery.\\
 Obsługa pakietu z poziomu linii komend jest następująca:\\
+
 uv4l $--$driver [moduł] $--$video\_nr [numer] $--$encoding [kodowanie] $--$width [szerokość] $--$height [wysokość] \\
-Przykładowe wywołanie sterownika uv4l $--$driver raspicam --video\_nr 0 $--$encoding yuv420 $--$width 640 $--$height 480\\
+
+Przykładowe wywołanie sterownika:\\
+\begin{lstlisting}[caption = {Składnia wywołania sterownika UV4L}, label=UV4L, language=BASH]
+ uv4l --driver raspicam --video_nr 0 --encoding yuv420 --width 640
+  --height 480
+\end{lstlisting}
 Uruchomi moduł raspicam, który zarejestruje urządzenie pod węzłem /dev/video0 z kodowaniem strumienia YUV420 i rozdzielczością 640x480.\\
 	\item Serwer HTTP Apache 2
+Do pracy z przygotowanymi skryptami PHP i jQuery serwer został odpowiednio skonfigurowany. 
 		\end{itemize}
 \end{description}
 
@@ -122,7 +127,7 @@ Kolejnym krokiem jest wyodrębnienie z danej klatki wszystkich twarzy znajdując
 \begin{lstlisting}[caption = {Funkcja robocza klasy Logger.}, label=Logger, language=C++]
 extern std::vector<cv::Rect> faces;
 bool Logger::work(void* wsk){
-	std::cout<<name<<" RUNNING"<<std::endl;
+	std::cout<<name<<" RUNNING"<<std::endl; 
 	std::ofstream log;
 	frame = (cv::Mat*)(wsk);
 #ifdef TIME_TEST
@@ -211,9 +216,23 @@ else
 
 Po wystawieniu stanu moduł przekazuje sterowanie Controllerowi wysyłając sygnał zwrotny SigW wraz z argumentem w postaci otrzymanego na początku wskaźnika wsk.
 
-\section{ Realizacja sprzętowa }
+\section{Realizacja sprzętowa }
 \subsection{Raspberry Pi 2 rev.B}
-\subsection{Układ SoC BCM 2836}
+Raspberry Pi jest w ostatnim czasie jedną z najpopularniejszych platform embedded-systems na świecie. Do jej głównych atutów należą : cena, wydajność, darmowy dostęp do narzędzi i innych zasobów, a przede wszystkim wsparcie techniczne ogromnej społeczności z całego świata. Układ jest wszechstronną bazą umożliwiającą tworzenie projektów zarówno na potrzeby początkujących użytkowników jak i tych bardziej zaawansowanych.\\
+Raspberry Pi 2 należy do drugiej generacji układów Raspberry. Jego premiera miała miejsce w lutym 2015 roku. Do kluczowych komponentów urządzenia można zaliczyć min. :
+\begin{itemize}[noitemsep]
+\item CPU BCM2836 firmy Broadcom quad-core ARM Cortex-A7 taktowany zegarem 900MHz.
+\item Pamięć 1GB RAM DDR2
+\item Jednostka GPU VideCore IV
+\item 4 porty USB
+\item 40 pinów GPIO (ang. General Purpose Input-Output)
+\item Port Ethernet
+\item Interfejs kamery - Camera Serial Interface (CSI)
+\item Slot kart microSD
+\end{itemize}
+Wymiary: 85 x 56 mm
+Układ zasilany jest napięciem 5V, przez złącze microUSB.
+Według źródła \cite{haydenjames} możliwe jest przetaktowanie rdzeni aż do 1100 MHz w specjalnym trybie force\_turbo, jednak wiąże się to z utratą gwarancji i możliwością niestabilnej pracy oraz uszkodzenia układu.
 \subsection{Moduł kamery}
 W podrozdziale omówione zostaną dostępne na rynku rozwiązania, które można wykorzystać w projekcie.  Do kryteriów kluczowych w projekcie należy zaliczyć : szybkość kamery, interfejs komunikacji oraz cenę. 
 
@@ -224,7 +243,7 @@ USB (ang. Universal Serial Bus) – uniwersalny sprzętowy interfejs komunikacyj
 \begin{itemize}[noitemsep]
 \item USB 1.1 do 12Mbit/s (1,5 MB/s)
 \item USB 2.0 do 480 Mbit/s (60MB/s)
-\item USB 3.0 do 5 Gbit/s 
+\item USB 3.0 do 5 Gbit/s (625MB/s)
 \end{itemize}
 
 Moduły z interfejsem USB są dosyć popularne zwłaszcza w rozwiązaniach desktopowych, gdzie szybkość przesyłu danych nie jest kluczowa. Świetnie sprawdzają się jako urządzenia dostarczające strumienia wideo dla aplikacji VoIP (ang. Voice over IP). Jako dodatkowy atut można wyróżnić często stosowane wbudowane mikrofony.
@@ -260,7 +279,7 @@ Moduł ten wysyła dane za pomocą szyny Camera Serial Interface (CSI-2) do proc
  \hline
 Standard transmisji danych &	MIPI CSI-2 \\
 Rozdzielczość Video &	1080p,720p,640x480(VGA) \\
-Maksymalna ilość klatek/s &	30fps@ 1080p, 60fps@720p, 90fps@640x480 \\
+Maksymalna ilość klatek/s &	30fps@1080p, 60fps@720p, 90fps@640x480 \\
 Pole widzenia FOV (ang. Field of View) & 53.5st. (horizontal) 41.41st (vertical) \\
 Wbudowany mikrofon &	Nie \\
 Cena: &	85zł \\
@@ -293,4 +312,6 @@ Urządzenie komunikuje się z procesorem za pomocą interfejsu SCCB ( ang. Seria
 \end{figure} 
 
 \subsection{Obudowa urządzenia}
-
+Aby zapewnić bezpieczeństwo urządzeniu od wilgoci, zabrudzeń i innych niekorzystnych czynników zastosowana została specjalna obudowa (rys. \ref{}) dedykowana układom Raspberry Pi B+ oraz Raspberry Pi 2. 
+Obudowa ta zawiera otwory pozwalające na wyprowadzenie złącz : Ethernet, USB, kamery, wyświetlacza, złącza zasilania - microUSB oraz portów GPIO. Ponadto od wewnętrznej strony zawiera otwory mocowania (za pomocą śrub) modułu RaspiCam oraz otwór na obiektyw kamery, dzięki czemu sensor jest również zabezpieczony.\\
+Obudowa została wybrana do celów prototypowych( co nie wyklucza zastosowania jej w rozwiązaniach docelowych). Należy jednak zwrócić uwagę, że po wykonaniu obudowę można zmienić dostosowując jej konstrukcję do wymaganych potrzeb i implementacji. 

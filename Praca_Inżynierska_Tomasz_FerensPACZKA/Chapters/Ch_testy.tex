@@ -2,8 +2,7 @@
 \chapter{Testowanie} % Chapter title
 
 Jednym z kluczowych zagadnień każdego projektu jest weryfikacja poprawności działania urządzenia. Oprócz weryfikacji funkcjonalnej w pracy tej istotne są pomiary czasów odpowiedzi poszczególnych modułów, a przede wszystkim modułu Object\_Detection odpowiedzialnego za obsługę kamery i przetwarzanie obrazu. Pomiary te pozwolą oszacować całkowity czas odpowiedzi urządzenia, a także dzięki nim będzie można porównać działanie układu opartego na platformie Raspberry i kamerze dedykowanej oraz komputerze klasy PC z kamerą USB.
-Na TODO!
-
+Na potrzeby procesu testowania zaimplementowane zostały odpowiednie moduły testujące, umożliwiające dzięki zastosowanej przy projektowaniu aplikacji technice OO(orientowanej-obiektowo) w wygodny sposób przeprowadzić scenariusz testowy zaprezentowany na rys.<rysunek>.
 \section{Implementacja modułu testowego}
 Do przetestowania działania funkcji oraz pomiaru czasu  stworzony został oddzielny moduł Time\_Test. Moduł ten wykorzystuje implementację obiektowo-orientowaną aplikacji głównej, co pozwala w łatwy i przejrzysty sposób dokonać testu i pomiaru czasu działania każdego modułu roboczego.
 
@@ -175,11 +174,23 @@ Jak widać przy większej ilości iteracji średnie czasy są znacznie mniejsze.
 W obu przypadkach na całkowity czas odpowiedzi kamery ma wpływ głównie działanie modułu Object\_Detection. Nie jest to zaskakujący rezultat, gdyż moduł ten wykonuje dwa ważne zadania tj. pośredniczy w przechwyceniu strumienia video oraz dokonuje przetworzenia każdej przez algorytm wykorzystujący kaskady Haar’a. Zdecydowana przewaga platformy ASUS wynika z dużo większej wydajności jednostki GPU i CPU względem platformy Raspberry. Dla pomiaru czasu działania modułu Logger’a kluczowym aspektem jest nośnik na jakim dokonywany jest zapis zdjęcia wykrytego obiektu. 
 Raspberry Pi 2 wykorzystuje kartę Micro SD class 10, co wg specyfikacji powinno gwarantować minimalny transfer na poziomie 10MB/s. W przypadku ASUS’a jest to dużo szybszy dysk twardy wykorzystujący magistralę SATA, zapewniającą wg specyfikacji transfer na poziomie ok. 179MB/s. Stąd też widoczna jest róznica w czasach.
 Jako, że laptop ASUS nie posiada portów GPIO, test modułu Worker w zasadzie pokazuje tylko czas wywołania funkcji roboczej.\\
-Podsumowując – platforma Raspberry pod względem wydajności ustępuje rozwiązaniom desktopowym, jednak różnica nie jest ogromna. Czas reakcji na poziomie 0,5s z powodzeniem pozwala na wykorzystanie urządzenia w wielu dziedzinach. Ponadto uwzględniając atuty takie jak: niewielkie gabaryty, niskie zużycie energii oraz możliwość sterowania urządzeniami zewnętrznymi Raspberry Pi 2 zdecydowanie wygrywa z platformą ASUS.
-
+Podsumowując – platforma Raspberry pod względem wydajności ustępuje rozwiązaniom desktopowym, jednak różnica nie jest ogromna. Czas reakcji na poziomie 0,5s z powodzeniem pozwala na wykorzystanie urządzenia w wielu dziedzinach.
+\begin{description}
+\item Ponadto uwzględniając atuty takie jak:
+\begin{itemize}
+ \item niewielkie gabaryty
+ \item niskie zużycie energii
+ \item możliwość sterowania urządzeniami zewnętrznymi 
+ \item mobilność - łatwość montażu w warunkach trudno dostępnych
+ \item niską cenę
+ \item możliwość własnej implementacji sprzętowej (przygotowanie dedykowanego urządzenia na podstawie płyty bazowej)
+  
+ Raspberry Pi 2 zdecydowanie wygrywa z platformą ASUS.
+\end{itemize}
+\end{description}
 
 %Podsumowanie ma być jako nowy rozdział (chapter!)
 \chapter{Podsumowanie} 
 
-Realizacja pracy zakończyła się sukcesem. Kamera spełnia wszystkie założenia i jest zgodna z koncepcją. Potwierdzeniem tego są wykonane testy, które zweryfikowały projekt jako poprawnie działający, a do tego pokazały realne możliwości sprzętowo-programowe urządzenia.\\
-Projekt jest doskonałą bazą wyjściową do dalszego rozwoju. Dzięki zaimplementowanej elastycznej strukturze aplikacji możliwe jest rozszerzenie funkcjonalności o komunikację z innymi urządzeniami i stworzenie sieci kamer współpracujących ze sobą. A także adaptację innych algorytmów na potrzeby np. diagnostyki medycznej, czy zastosowań w robotyce.
+Realizacja pracy zakończyła się sukcesem. Kamera spełnia wszystkie założenia i jest zgodna z obraną koncepcją. Potwierdzeniem tego są wykonane testy, które zweryfikowały projekt jako poprawnie działający, a do tego pokazały realne możliwości sprzętowo-programowe urządzenia.\\
+Niniejsza praca jest doskonałą bazą wyjściową do dalszego rozwoju. Dzięki zaimplementowanej elastycznej strukturze aplikacji możliwe jest rozszerzenie funkcjonalności o komunikację z innymi urządzeniami i stworzenie sieci kamer współpracujących ze sobą. A także adaptację innych algorytmów na potrzeby np. diagnostyki medycznej, czy zastosowań w robotyce.
