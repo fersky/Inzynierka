@@ -5,15 +5,16 @@
  *      Author: fero
  */
 #include "Logger.hpp"
-
+int d =0;
 #include "main.hpp"
 extern std::vector<cv::Rect> faces;
 extern cv::Mat test_frame;
 bool Logger::work(void* wsk){
 	std::cout<<name<<" RUNNING"<<std::endl;
 	std::ofstream log;
-
+if(wsk){
 	frame = (cv::Mat*)(wsk);
+
 #ifdef TIME_TEST
 frame = &test_frame;
 #endif
@@ -24,8 +25,8 @@ frame = &test_frame;
 
 	for(int i=0; i<faces.size();i++){
 
-		//string index = to_string(i);
-	    std::string name = getcurdate()+".jpg";
+		std::string index = std::to_string(i);
+	    std::string name = index + getcurdate()+".jpg";
 	    cv::Mat face(*frame,faces[i]);
 	    std::string str(name);
 	    size_t found= str.find_first_of(":");
@@ -45,7 +46,11 @@ frame = &test_frame;
 	    	std::cout<<"ERROR WRITING IMAGE TO FILE"<<std::endl;
 
 	}
-
+	d++;
+	printf("LOG NR %d \n",d);
+SigW(LG,0);
+}
+else printf("pusty wskaźnik\n");
 return 0;
 }
 

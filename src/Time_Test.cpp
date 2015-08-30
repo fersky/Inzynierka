@@ -8,7 +8,10 @@
 using namespace std;
 using namespace chrono;
 
+
+
 int c=0;
+
 
 duration<double>  time_span,total_time;
 vector <duration<double>> times;
@@ -23,7 +26,11 @@ int i;
 
 
 
+
+
+
 void Time_Test::measure_time(int n){
+
 
 
 	printf("Start of time tests \n");
@@ -31,8 +38,12 @@ void Time_Test::measure_time(int n){
 	high_resolution_clock::time_point t2 ;
 	duration<double>  time_span,total_time;
 	std::vector <std::chrono::duration<double>> times;
+
+printf("\nIlosc iteracji %d",n);
+
 	N=n;
 	printf("\nNumber of iterations : %d",N);
+
 
 		for (int i=0; i<module_nr; ++i){
 			 t1 = high_resolution_clock::now();
@@ -46,7 +57,6 @@ c++;
 			 times.push_back(time_span);
 			 total_time += time_span;
 		  }
-
 
 }
 void Time_Test::display_results(){

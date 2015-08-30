@@ -19,6 +19,7 @@ cv::CascadeClassifier eyes_cascade;
 cv::String window_name;
 cv::VideoCapture capture;
 cv::Mat frame;
+bool enabled;
 ~Object_Detection();
 Object_Detection(Controller * k);
 bool work(void*);

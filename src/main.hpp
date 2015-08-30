@@ -7,8 +7,10 @@
 
 #ifndef MAIN_HPP_
 #define MAIN_HPP_
+
+//#define TIME_TEST
 //#define BRD_BUILD
-#define TIME_TEST
+
 
 #define FD 0
 #define WR 2

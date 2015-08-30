@@ -10,10 +10,10 @@ bool Controller::logicUnit(int nr,void* wsk){
 	int state= -1;
 	int * notification;
 	std::cout<<"CONTROLLER "<<"RECEIVED SIGNAL : " << nr<<std::endl;
-switch (nr){
-case FD :
+	switch (nr){
+	case FD :
 
-
+		/*
 	if(detected)
 	{
 	state=1;
@@ -28,31 +28,47 @@ case FD :
 		usleep(latency*1000);
 		detected=true;
 		}
+		 */if(detected){
+			 printf("\n po walidacji \n");
+			 detected=false;
+			 modules[FD]->enabled=false;
+			 modules[LG]->work(wsk);
+			 wsk=0;
 
-	break;
-case LG:					//signal from Logger
 
-	break;
+		 }
+		 else{
+			 printf("\n pierwszy sygnał\n");
+			 usleep(4000*1000);
+			 detected=true;
+		 }
 
-case WR:
-	//signal from Worker
-	 notification = static_cast<int*>(wsk);
-//TODO: sygnał do Object_Detection? : STOP
-	if(*notification==2)//drzwi zamkniete
-modules[FD]->enabled=false;
-	else
+		 break;
+	case LG:					//signal from Logger
 		modules[FD]->enabled=true;
-	break;
-default :
-;
+		printf("OBD enabled, running OBD->work()");
+		//modules[FD]->work();
+		break;
 
-}
+	case WR:
+		//signal from Worker
+		notification = static_cast<int*>(wsk);
+		//TODO: sygnał do Object_Detection? : STOP
+		if(*notification==2)//drzwi zamkniete
+			modules[FD]->enabled=false;
+		else
+			modules[FD]->enabled=true;
+		break;
+	default :
+		;
 
-return false;
+	}
+
+	return false;
 }
 
 Controller::Controller(int w,int h,int l):
-	cam_w(w),cam_h(h),latency(l){
+							cam_w(w),cam_h(h),latency(l){
 	modules[FD]=new Object_Detection(this);
 	modules[LG]=new Logger;
 	modules[WR]=new Worker;

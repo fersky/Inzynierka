@@ -22,12 +22,14 @@ void * detector(void *);
 
 
 int main(int argc, char **argv){
-	pthread_t tid;
+/*	pthread_t tid;
 	pthread_attr_t attr;
 	pthread_attr_init(&attr);
 	if(pthread_create(&tid,&attr,detector,NULL)){
 std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
+
 }
+*/
 #ifdef TIME_TEST
 
 	Time_Test test;
@@ -48,7 +50,9 @@ std::cout<<"BLAD TWORZENIA WATKU"<<std::endl;
 	}
 	else{
 	Controller C(atoi(argv[1]),atoi(argv[2]),atoi(argv[3]));
+
 	C.modules[0]->work();
+
 
 	}
 #endif
