@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="js/jquery.min.js"></script>
+    <title>Fast Intelligent Camera v.1.1</title>
+</head>
+
+<body>
+
+</body>
+
+
+<script type="text/javascript">
+    var lastPhoto = "";
+    var count = 0;
+    getImages();
+    setInterval(function() {
+        reloadImages();
+    }, 1000);
+
+    function getImages() {
+        $.ajax({
+            url: "getFaces.php",
+            dataType: "json",
+            success: function(data) {
+                lastPhoto = $(data).last()[0];
+
+                $('body').before('<h2 style="font-size:300%"> CAMERA LOG</h2><div id="humcount"></div>');
+
+                $.each(data, function(i, filename) {
+
+                    var $temp = filename;
+                    count++;
+                    humcount = document.getElementById('humcount');
+                    humcount.innerHTML = 'ILOSC OSOB ' + count;
+
+                    dataZdjecia = $temp.split("X")[1].substring(0, $temp.split("X")[1].length - 4);
+                    numerZdjecia = $temp.split("X")[0];
+                    //    numerZdjecia = $(filename).split("X")[0];
+                    $('body').prepend('<img class="face-image" src="faces/' + filename + '">Data zdjęcia: ' + dataZdjecia + ' Numer zdjęcia: ' + numerZdjecia + '<br>');
+                });
+            }
+
+        });
+    };
+
+    function reloadImages() {
+        $.ajax({
+            url: "getFaces.php",
+            dataType: "json",
+            success: function(data) {
+
+                if ($('.face-image').first().attr("src") == "faces/" + $(data).last()[0]) {
+                    console.log("if1")
+
+                } else {
+
+
+                    var flag = false;
+                    $.each(data, function(i, filename) {
+
+                        var $temp = filename;
+                        if (flag == false) {
+                            if ($temp == lastPhoto) {
+                                flag = true;
+                            } else {
+                                //nic sie nie dzieje, bo to pliki ktore już są na stronie
+                            }
+
+                        }
+                        if (flag == true) {
+                            dataZdjecia = $temp.split("X")[1].substring(0, $temp.split("X")[1].length - 4);
+                            numerZdjecia = $temp.split("X")[0];
+                            //    numerZdjecia = $(filename).split("X")[0];
+                            $('body').prepend('<img class="face-image" src="faces/' + filename + '">Data zdjęcia: ' + dataZdjecia + ' Numer zdjęcia: ' + numerZdjecia + '<br>');
+                            count++;
+                            humcount = document.getElementById('humcount');
+                            humcount.innerHTML = 'ILOSC OSOB ' + count;
+
+                        };
+
+                    });
+                    lastPhoto = $(data).last()[0];
+
+                    flag = false;
+                }
+
+            }
+        });
+
+    }
+</script>
+
+
+</html>
