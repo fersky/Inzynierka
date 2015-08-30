@@ -1,0 +1,39 @@
+\BOOKMARK [1][-]{Abstract.1}{Abstract}{}% 1
+\BOOKMARK [1][-]{Dedication.1}{Dedication}{}% 2
+\BOOKMARK [0][-]{chapter*.1}{Wydruki}{}% 3
+\BOOKMARK [0][-]{chapter.1}{Wprowadzenie}{}% 4
+\BOOKMARK [1][-]{subsection*.2}{Internet of Things}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.1}{Przeglad dostepnych komercyjnych rozwiazan}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.2}{Przeglad dostepnych system\363w wbudowanych}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.3}{Architektura systemu Linux}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.4}{Dystrybucje systemu Linux}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.5}{Konkurencyjne rozwiazania}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.6}{Podsumowanie}{chapter.1}% 11
+\BOOKMARK [0][-]{chapter.2}{Cel i za\233ozenia pracy}{}% 12
+\BOOKMARK [0][-]{chapter.3}{Koncepcja}{}% 13
+\BOOKMARK [1][-]{section.3.1}{Maksymalizacja szybkosci}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.2}{Inteligencja dostosowana do wymog\363w monitoringu}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.3}{Modularnosc }{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.4}{Interface uzytkownika}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.5}{Funkcje systemu}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.6}{Szczeg\363\233owe om\363wienie funkcji}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.6.1}{Detekcja obiekt\363w}{section.3.6}% 20
+\BOOKMARK [2][-]{subsection.3.6.2}{ Sterowanie urzadzeniem zewnetrznym}{section.3.6}% 21
+\BOOKMARK [2][-]{subsection.3.6.3}{ Logowanie zdarzen na serwerze HTTP}{section.3.6}% 22
+\BOOKMARK [0][-]{chapter.4}{Realizacja}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Oprogramowanie}{chapter.4}% 24
+\BOOKMARK [2][-]{subsection.4.1.1}{Narzedzia i srodowisko pracy}{section.4.1}% 25
+\BOOKMARK [2][-]{subsection.4.1.2}{Algorytm}{section.4.1}% 26
+\BOOKMARK [2][-]{subsection.4.1.3}{Aplikacja}{section.4.1}% 27
+\BOOKMARK [1][-]{section.4.2}{Realizacja sprzetowa }{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.2.1}{Raspberry Pi 2 rev.B}{section.4.2}% 29
+\BOOKMARK [2][-]{subsection.4.2.2}{Modu\233 kamery}{section.4.2}% 30
+\BOOKMARK [2][-]{subsection.4.2.3}{Obudowa urzadzenia}{section.4.2}% 31
+\BOOKMARK [0][-]{chapter.5}{Testowanie}{}% 32
+\BOOKMARK [1][-]{section.5.1}{Implementacja modu\233u testowego}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.2}{ Wyniki pomiar\363w}{chapter.5}% 34
+\BOOKMARK [1][-]{section.5.3}{Uruchomienie test\363w}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.4}{Wnioski}{chapter.5}% 36
+\BOOKMARK [0][-]{chapter.6}{Podsumowanie}{}% 37
+\BOOKMARK [0][-]{chapter*.41}{Literatura}{}% 38
+\BOOKMARK [0][-]{appendix.A}{Mapowanie port\363w procesora BCM2836}{}% 39

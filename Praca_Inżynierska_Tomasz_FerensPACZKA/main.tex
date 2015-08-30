@@ -1,0 +1,59 @@
+\documentclass[paper=a4,fontsize=12pt,oneside]{praca_mgr_pw_mod}
+
+\input{praca_config}                
+\input{TikZ_config}   % odkomentuj jak chcesz pisać schematy w Latex i zainstaluj pakiet TikZ
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+\pagenumbering{gobble}
+%----------------------------------------------------------------------------------------
+%	PRE-CONTENT THESIS PAGES 	(na koniec odkomentować)
+%----------------------------------------------------------------------------------------
+	\include{FrontBackMatter/Titlepage} 	% Main title
+	\cleardoublepage	
+	\include{FrontBackMatter/Abstract}		% Abstract
+	\cleardoublepage
+	\include{Chapters/Chapter_CV}			% Życiorys
+	\cleardoublepage
+	\include{FrontBackMatter/Dedication} 	% Dedykacja podziękowanie
+	\cleardoublepage						
+
+	\pagenumbering{arabic}	
+	\tableofcontents % Bookmark name visible in a PDF viewer
+	\newpage
+	\lstlistoflistings
+	\listoftables
+	\listoffigures
+
+%----------------------------------------------------------------------------------------
+%	CHAPTERS
+%-----------------------------------------------------------------------------------	
+	\include{Chapters/Ch_wstep}
+	\include{Chapters/Ch_cel_pracy}
+	\include{Chapters/Koncepcja}
+	\include{Chapters/Ch_implementacja}
+	%\include{Chapters/Ch_symulacje}
+	\include{Chapters/Ch_testy}	
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY, CONTENSTS, LISTS
+%----------------------------------------------------------------------------------------
+	\include{Chapters/Ch_bibliografia}	
+%----------------------------------------------------------------------------------------
+%	APENDIX
+%----------------------------------------------------------------------------------------
+	\appendix
+	\include{Chapters/Dodatek_A}
+	%\include{Chapters/Dodatek_B}	%karta SD
+	%\include{Chapters/Dodatek_C}
+	%\include{Chapters/Dodatek_D}	%SP601
+	%\include{Chapters/Dodatek_E}	%SP601
+%----------------------------------------------------------------------------------------
+%	TikZ diagrams, charts, diagramflow ect..
+%----------------------------------------------------------------------------------------
+	%\input{TikZ_examples}
+
+%----------------------------------------------------------------------------------------
+\end{document}

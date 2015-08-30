@@ -7,10 +7,21 @@
 
 #ifndef MAIN_HPP_
 #define MAIN_HPP_
+<<<<<<< HEAD
 
 //#define TIME_TEST
 //#define BRD_BUILD
 
+=======
+<<<<<<< HEAD
+#define TIME_TEST
+//#define BRD_BUILD
+#define TIME_TEST
+=======
+//#define BRD_BUILD
+#define TIME_TEST
+>>>>>>> 60c89a96216ab0c2086ea40dd6ee8575ecb81f68
+>>>>>>> b3ac8e18fd3c3b76500d55126d8894b7f3152b4f
 
 #define FD 0
 #define WR 2

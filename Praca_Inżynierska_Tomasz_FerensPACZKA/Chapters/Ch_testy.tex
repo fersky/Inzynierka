@@ -1,0 +1,196 @@
+% Chapter Ocena działania i skuteczności urządzenia
+\chapter{Testowanie} % Chapter title
+
+Jednym z kluczowych zagadnień każdego projektu jest weryfikacja poprawności działania urządzenia. Oprócz weryfikacji funkcjonalnej w pracy tej istotne są pomiary czasów odpowiedzi poszczególnych modułów, a przede wszystkim modułu Object\_Detection odpowiedzialnego za obsługę kamery i przetwarzanie obrazu. Pomiary te pozwolą oszacować całkowity czas odpowiedzi urządzenia, a także dzięki nim będzie można porównać działanie układu opartego na platformie Raspberry i kamerze dedykowanej oraz komputerze klasy PC z kamerą USB.
+Na potrzeby procesu testowania zaimplementowane zostały odpowiednie moduły testujące, umożliwiające dzięki zastosowanej przy projektowaniu aplikacji technice OO(orientowanej-obiektowo) w wygodny sposób przeprowadzić scenariusz testowy zaprezentowany na rys.<rysunek>.
+\section{Implementacja modułu testowego}
+Do przetestowania działania funkcji oraz pomiaru czasu  stworzony został oddzielny moduł Time\_Test. Moduł ten wykorzystuje implementację obiektowo-orientowaną aplikacji głównej, co pozwala w łatwy i przejrzysty sposób dokonać testu i pomiaru czasu działania każdego modułu roboczego.
+
+\begin{lstlisting}[caption = {Klasa testująca}, label=TestClass, language=C++]
+class Time_Test{
+private:
+	int module_nr;
+	std::vector <Module*> wektor;
+
+public:
+	void add(Module **);
+	void measure_time();
+	void display_results();
+	}; 
+\end{lstlisting}
+
+\begin{description}
+\item Praca modułu opiera się na trzech funkcjach:
+\begin{itemize}[noitemsep]
+\item void add(Module**) – metoda ta przyjmuje jako argument tablicę wskaźników na obiekty typu Module i umieszcza je w składowej wektor.
+\item bool measure\_time() – metoda odpowiedzialna za pomiar czasów poszczególnych modułów oraz całkowitego. 
+\end{itemize}
+\item Metoda ta wykorzystuje dostarczone wraz z biblioteką standardową języka C++ bibliotekę chrono, która opiera się na 3 głównych obiektach, jak : 
+\begin{itemize}[noitemsep]
+\item duration – mierzące okres czasu – w projekcie są to globalne zmienne : time\_span (czas działania modułu), total\_time (czas całkowity) oraz wektor czasów times przechowujący poszczególne czasy działania modułów.
+\item time\_point – odniesienie do punktu w czasie – w projekcie są to zmienne t1 oraz t2
+\item clock – framework, odpowiadający za odniesienie czasu określonego przez obiekty typu time\_point względem czasu rzeczywistego. – w projekcie są to obiekty typu  time\_point oraz metoda now() zwracająca aktualny czas frameworku high\_resolution\_clock, korzystającego z zegara wysokiej precyzji.
+
+\end{itemize}
+\end{description}
+
+
+\begin{lstlisting}[caption = {Listing Implementacja funkcji testującej}, label=TestFun, language=C++]
+void Time_Test::measure_time(int n){
+
+	printf("Start of time tests \n");
+
+	high_resolution_clock::time_point t1;
+	high_resolution_clock::time_point t2 ;
+
+	duration<double>  time_span,total_time;
+	std::vector <std::chrono::duration<double>> times;
+           n=N;
+	printf("\nNumber of iterations : %d",n);
+
+		for (int i=0; i<module_nr; ++i){
+			 t1 = high_resolution_clock::now();
+c=0;
+while(c<N){
+		 assert(! wektor[i]->work());
+c++;
+}	
+		 	t2 = high_resolution_clock::now();
+
+			 time_span  = duration_cast<nanoseconds>(t2 - t1);
+			 times.push_back(time_span);
+			 total_time += time_span;
+		  } 
+
+\end{lstlisting}
+
+Funkcja przedstawiona na listingu 5.2 posiada pętlę główną for – w ramach której następuje iteracja po kolejnych modułach i wywołanie polimorficzne funkcji work() dla każdego z nich. Wywołanie to jest objęte dodatkową pętlą while, która jest odpowiedzialna za uśrednienie wyników pomiaru czasu. W każdej iteracji pętli for funkcja ta zapisuje w zmiennych t1 i t2 punkty czasowe odpowiednio przed i po wywołaniu N-razy (n jest argumentem wejściowym wywołania programu głównego) funkcji składowej work() badanego modułu, a następnie zapisuje wartość ich różnicy do zmiennej time\_span. Czas zmierzony dla każdego modułu jest umieszczony w wektorze times. Jednocześnie w zmiennej total\_time przechowywany jest czas całkowity wykonania sekwencji modułów.
+
+Metoda ta dokonuje także testu poprawności działania funkcji. Polega to na wywołaniu każdej funkcji roboczej work() modułów wewnątrz funkcji assert().
+Jeśli funkcja work zwróci wartość różną od 0 to funkcja assert poda komunikat wraz z nazwą pliku źródłowego i numeru linii w której to się stało.
+
+Za pomocą metody display\_results() wyniki  przechowywane w wektorze times i zmiennej total\_time są uśrednione i prezentowane użytkownikowi dla każdego modułu.
+
+\section{ Wyniki pomiarów}
+W tabeli 5.1 znajduje się zestawienie pomiarów czasów wykonanych na platformie Raspberry Pi 2 z modułem RaspiCam oraz na komputerze klasy notebook: ASUS  X53S z modułem kamery USB.
+Specyfikacja platformy ASUS:
+\begin{itemize}[noitemsep]
+\item Procesor Inter Core i5 2410M
+\item Pamięć 8GB 1333MHz DDR3
+\item GPU: Nvidia GeForce GT 540M 1GB DDR3
+\item Dysk twardy 750GB SATA 7200 obr./min.
+\end{itemize}
+Systemem wykorzystanym na platformie ASUS jest Linux Ubuntu 14.04 uruchamianym w maszynie wirtualnej programu VirtualBox (wersja 4.3.30). 
+Zasoby przydzielone maszynie wirtualnej :
+\begin{itemize}[noitemsep]
+\item 4GB pamięci RAM
+\item 2 wirtualne rdzenie CPU
+\item 128 MB Video Memory
+\end{itemize}
+Specyfikacja platformy Raspberry :
+\begin{itemize}[noitemsep]
+\item Procesor BCM 2836  quad core
+\item 1GB pamięci RAM DDR2
+\item GPU: VideoCore IV (przydzielone 128 MB pamięci RAM z zasobów wspólnych)
+\end{itemize}
+Poniżej znajdują się wyniki dla N = 10, 100 i 500 powtórzeń wywołania funkcji roboczych poszczególnych modułów dla rozdzielczości strumienia : 320x240.
+
+\begin{table}[hbt!]
+%\myfloatalign
+\caption[Ilość iteracji N = 10]{Zestawienie wyników pomiarów czasu dla różnych wartości N. Ilość iteracji N = 10}
+\begin{tabularx}{\textwidth}{|l|X|X|} 
+ \hline
+Moduł&	ASUS x53S&	Raspberry Pi 2\\ \hline
+Object\_Detection [ms]	&254,762741&	549,6572\\
+Worker [us]	&832,679&	98,599\\
+Logger [ms]	&0,712403&	6,425799\\
+Całkowity średni czas [ms]&	256&	556 \\
+\hline
+\end{tabularx}  
+\label{tab:compareAnalysers}
+\end{table}
+
+
+\begin{table}[hbt!]
+%\myfloatalign
+\caption[Ilość iteracji N = 100]{Zestawienie wyników pomiarów czasu dla różnych wartości N. Ilość iteracji N = 100}
+\begin{tabularx}{\textwidth}{|l|X|X|} 
+ \hline
+Moduł&	ASUS x53S	&Raspberry Pi 2 \\ \hline
+Object\_Detection [ms]&	137,7835103	&523,30284 \\
+Worker [us]	&387,455	&80,37 \\
+Logger [ms]&	1,907358&	6,440570 \\
+Całkowity średni czas [ms]	&140&	529 \\
+\hline
+\end{tabularx}  
+\label{tab:compareAnalysers}
+\end{table}
+
+
+\begin{table}[hbt!]
+%\myfloatalign
+\caption[Ilość iteracji N = 500]{Zestawienie wyników pomiarów czasu dla różnych wartości N. Ilość iteracji N = 500}
+\begin{tabularx}{\textwidth}{|l|X|X|} 
+ \hline
+Moduł&	ASUS x53S	&Raspberry Pi 2\\ \hline
+Object\_Detection [ms]&	118,555288	&525,432592\\
+Worker [us]&	95,112&	77,03\\
+Logger [ms]&	1,339017&	6,264304\\
+Całkowity średni czas [ms]&	119&	531\\
+\hline
+\end{tabularx}  
+\label{tab:compareAnalysers}
+\end{table}
+
+\section{Uruchomienie testów}
+\begin{description}
+\item Na proces testowania składa się:
+\begin{itemize}[noitemsep]
+\item Zbudowanie projektu 
+\item Załadowanie modułu sterownika V4L2
+\item Uruchomienie aplikacji testowej z odpowiednimi argumentami
+\end{itemize}
+\end{description}
+Na zbudowanie projektu składają się min. Kompilacja warunkowa ( zbędne do testowania bloki aplikacji głównej są pomijane), oraz wywołanie skryptu budującego makefile.
+Załadowanie sterownika możliwe jest z poziomu linii komend i musi być koniecznie wykonane przed uruchomieniem aplikacji. Minimalna wersja komendy ta jest następująca:\\
+uv4l $--$driver raspicam $--$video\_nr nr\\
+Gdzie nr to index pod jakim zostanie zarejestrowane urządzenie RaspiCam przez sterownik V4L2 w systemie (np. dla nr = 0 będzie to : /dev/video0).\\
+Dodatkowe argumenty pozwalające konfigurować sensor z poziomu sterownika to :\\
+$--$encoding yuv420\\
+$--$width 320\\
+$--$height 240\\
+Atrybut $--$encoding pozwala wymusić format kodowania obrazu, w tym przypadku zastosowany jest format YUV420. Kolejne dwa argumenty są odpowiedzialne za szerokość i wysokość obrazu strumienia(w projekcie można je pominąć z  uwagi na to, że z poziomu aplikacji także są konfigurowalne, co jest opisane niżej oraz w rozdziale 4.).\\  
+Uruchomienie wymaga podania ścieżki pliku binarnego cam wraz z argumentami oddzielonymi spacjami:\\
+./cam width height N\\
+width – szerokość klatki strumienia video\\
+height – wysokość klatki strumienia video\\
+N – ilość iteracji ( opisane w paragrafie 5.2)\\
+Przykładowe wywołanie : ./cam 320 240 100\\
+Uruchomi w rezultacie aplikację testową z parametrami strumienia : rozdzielczość 320x240 oraz wykona uśrednione na 100 iteracjach testy.
+
+\section{Wnioski}
+Na podstawie pomiarów stwierdzić można, że kamera zrealizowana na platformie Raspberry ustępuje urządzeniu o dużo większej mocy obliczeniowej jakim jest laptop ASUS x53S.
+Jak widać przy większej ilości iteracji średnie czasy są znacznie mniejsze. W przypadku platformy ASUS wyraźnie widać względny spadek czasów. Najprawdopodobniej wynika to z optymalizacji sprzętowej procesora i jednostki GPU przy wielokrotnym odnoszeniu się do tego samego fragmentu pamięci.
+W obu przypadkach na całkowity czas odpowiedzi kamery ma wpływ głównie działanie modułu Object\_Detection. Nie jest to zaskakujący rezultat, gdyż moduł ten wykonuje dwa ważne zadania tj. pośredniczy w przechwyceniu strumienia video oraz dokonuje przetworzenia każdej przez algorytm wykorzystujący kaskady Haar’a. Zdecydowana przewaga platformy ASUS wynika z dużo większej wydajności jednostki GPU i CPU względem platformy Raspberry. Dla pomiaru czasu działania modułu Logger’a kluczowym aspektem jest nośnik na jakim dokonywany jest zapis zdjęcia wykrytego obiektu. 
+Raspberry Pi 2 wykorzystuje kartę Micro SD class 10, co wg specyfikacji powinno gwarantować minimalny transfer na poziomie 10MB/s. W przypadku ASUS’a jest to dużo szybszy dysk twardy wykorzystujący magistralę SATA, zapewniającą wg specyfikacji transfer na poziomie ok. 179MB/s. Stąd też widoczna jest róznica w czasach.
+Jako, że laptop ASUS nie posiada portów GPIO, test modułu Worker w zasadzie pokazuje tylko czas wywołania funkcji roboczej.\\
+Podsumowując – platforma Raspberry pod względem wydajności ustępuje rozwiązaniom desktopowym, jednak różnica nie jest ogromna. Czas reakcji na poziomie 0,5s z powodzeniem pozwala na wykorzystanie urządzenia w wielu dziedzinach.
+\begin{description}
+\item Ponadto uwzględniając atuty takie jak:
+\begin{itemize}
+ \item niewielkie gabaryty
+ \item niskie zużycie energii
+ \item możliwość sterowania urządzeniami zewnętrznymi 
+ \item mobilność - łatwość montażu w warunkach trudno dostępnych
+ \item niską cenę
+ \item możliwość własnej implementacji sprzętowej (przygotowanie dedykowanego urządzenia na podstawie płyty bazowej)
+  
+ Raspberry Pi 2 zdecydowanie wygrywa z platformą ASUS.
+\end{itemize}
+\end{description}
+
+%Podsumowanie ma być jako nowy rozdział (chapter!)
+\chapter{Podsumowanie} 
+
+Realizacja pracy zakończyła się sukcesem. Kamera spełnia wszystkie założenia i jest zgodna z obraną koncepcją. Potwierdzeniem tego są wykonane testy, które zweryfikowały projekt jako poprawnie działający, a do tego pokazały realne możliwości sprzętowo-programowe urządzenia.\\
+Niniejsza praca jest doskonałą bazą wyjściową do dalszego rozwoju. Dzięki zaimplementowanej elastycznej strukturze aplikacji możliwe jest rozszerzenie funkcjonalności o komunikację z innymi urządzeniami i stworzenie sieci kamer współpracujących ze sobą. A także adaptację innych algorytmów na potrzeby np. diagnostyki medycznej, czy zastosowań w robotyce.

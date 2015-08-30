@@ -7,12 +7,19 @@
 #include "main.hpp"
 using namespace std;
 using namespace chrono;
+<<<<<<< HEAD
+int c=0;
+=======
 
 
 
 int c=0;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 60c89a96216ab0c2086ea40dd6ee8575ecb81f68
+>>>>>>> b3ac8e18fd3c3b76500d55126d8894b7f3152b4f
 duration<double>  time_span,total_time;
 vector <duration<double>> times;
 
@@ -26,10 +33,17 @@ int i;
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+<<<<<<< HEAD
+void Time_Test::measure_time(int b){
+=======
+>>>>>>> b3ac8e18fd3c3b76500d55126d8894b7f3152b4f
 void Time_Test::measure_time(int n){
+>>>>>>> 60c89a96216ab0c2086ea40dd6ee8575ecb81f68
 
 
 
@@ -38,13 +52,21 @@ void Time_Test::measure_time(int n){
 	high_resolution_clock::time_point t2 ;
 	duration<double>  time_span,total_time;
 	std::vector <std::chrono::duration<double>> times;
+<<<<<<< HEAD
 
 printf("\nIlosc iteracji %d",n);
 
 	N=n;
 	printf("\nNumber of iterations : %d",N);
 
+=======
+<<<<<<< HEAD
+printf("\nIlosc iteracji %d",b);
+=======
+	printf("\nNumber of iterations : %d",n);
+>>>>>>> b3ac8e18fd3c3b76500d55126d8894b7f3152b4f
 
+>>>>>>> 60c89a96216ab0c2086ea40dd6ee8575ecb81f68
 		for (int i=0; i<module_nr; ++i){
 			 t1 = high_resolution_clock::now();
 c=0;
@@ -57,6 +79,19 @@ c++;
 			 times.push_back(time_span);
 			 total_time += time_span;
 		  }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 60c89a96216ab0c2086ea40dd6ee8575ecb81f68
+		  for (int i=0; i<3; i++)
+		  	std::cout<<"Czas działania modułu "<<wektor[i]->name+"\t"<< duration_cast<nanoseconds>(times[i]).count()/n<<std::endl;
+
+		  std::cout << "Total time " << duration_cast<milliseconds>(total_time).count()/n<< " miliseconds.";
+		  std::cout << std::endl;
+>>>>>>> b3ac8e18fd3c3b76500d55126d8894b7f3152b4f
 
 }
 void Time_Test::display_results(){
